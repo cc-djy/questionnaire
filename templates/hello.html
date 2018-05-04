@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title>问卷调查</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
-    hello world!
+
+<div class="container">
+
+    <h2>
+        第一部分
+    </h2>
+    <h4>
+        哪一答案最接近地描述了你通常的思考和行为方式
+    </h4>
+
+
+    <form>
+        <div>
+            <p>1、当你某日想去某个地方，你会 ？</p>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option1" checked>
+                    A.计划好将做的事情以及何时做
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option2">
+                    B.什么都不想就去
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <p>1、当你某日想去某个地方，你会 ？</p>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option1" checked>
+                    A.计划好将做的事情以及何时做
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option2">
+                    B.什么都不想就去
+                </label>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <p>1、当你某日想去某个地方，你会 ？</p>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option1" checked>
+                    A.计划好将做的事情以及何时做
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optionsRadios" value="option2">
+                    B.什么都不想就去
+                </label>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+
+        <!--下面这个是大概的生成规则-->
+        <!--((div#ques-$>p+div.radio*2>label>input[type="radio" name="optionsRadios" value="option$"])+hr)*26-->
+    </form>
+
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/js/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/js/bootstrap.min.js"></script>
+
 </body>
 </html>
