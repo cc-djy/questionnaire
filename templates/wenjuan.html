@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- 引入 Bootstrap -->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="mind">
+			<div class="swiper-container">
+				<div class="mindtop"> <span class="swiper-button-prev swiper-button-blue"></span>
+					<h4>生活常识选择题及答案</h4>
+					<span class="swiper-button-next swiper-button-blue"></span> </div>
+				<div class="swiper-wrapper" id="part1">
+					<dl class="swiper-slide" id="number1">
+						<dt>1、“大煮干丝”是哪个菜系的代表菜之一( )</dt>
+						<dd><label><input type="radio" name="1" value="1"/>A、四川菜系</label></dd>
+						<dd><label><input type="radio" name="1" value="2"/>B、山东菜系</label></dd>
+						<dd><label><input type="radio" name="1" value="3"/>C、广东菜系</label></dd>
+						<dd><label><input type="radio" name="1" value="4"/>D、淮扬菜系</label></dd>
+					</dl>
+					<dl class="swiper-slide" id="number2">
+						<dt>2. 吃冰淇淋不解渴主要是因为它:</dt>
+						<dd><label><input type="radio" name="2" value="1"/>A、含蛋白质</label></dd>
+						<dd><label><input type="radio" name="2" value="2"/>B、含脂肪</label></dd>
+						<dd><label><input type="radio"  name="2" value="3"/>C、含糖</label></dd>
+					</dl>
+				</div>
+				<div class="fl-left" id="numok"><button>交卷</button></div>
+			</div>
+		</div>
+		
+		<script src="js/jquery.min.js"></script>
+		<script type="text/javascript">
+			//交卷
+            //遍历第一部分题目的每一个选项的选择
+            
+            //这个一个JavaScript对象构造器，key-value对   形式{index:"",value=""}  分别代表题目，和用户选择的答案序号
+            function answer(index,value) {
+				this.index = index;
+				this.value = value;
+			}
+
+            var i=0    //用来表明题目序号，下面each是顺序遍历的
+			$("button").click(function() {
+                var results = new  Array()    //生成一个数组，存放所有题目的key-value对。
+				$("#part1").children().each(function (){
+					obj = new answer(++i,$(this).find("input:checked").val())
+					results.push(obj)          //把生成的某一道题目的答案放入数组中。
+				})
+                //使用ajax提交我们的results数组，转化为json格式的
+                $.ajax({url:"", data:JSON.stringify(results), success:function(result){
+					alert("提交成功")
+				}})
+			});
+            //提交的时候会有这个数组变为json传给url，你根据具体提示完成接下来做的功能
+		</script>
+	</body>
+
+</html>
