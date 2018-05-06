@@ -503,24 +503,25 @@
     <script type="text/javascript">
         //页面从服务器加载json数据
         $(document).ready(function() {
-                var array = new Array()
-                $.getJSON("url", function(data, status) {
-                    array = JSON.parse(data)
-                        //把接受到的数据数组放入页面中
-                    for (var i = 0; i < array.length; i++) {
-                        var obj = array[i]
-                        $("#part" + i + 1 + "> #description1" + i + 1 + "> h4") = obj.description
-                        for (var j = 0; j < obj.content.length; j++) {
-                            $("#part" + i + 1 + "> #exercise" + i + 1 + ">dt").text(obj.content[j].title) //存放title
-                            $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:first").text(obj.content[j].option) //存放选项1
-                            $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:last").text(obj.content[j].option) //存放选项2
-                        }
+            var array = new Array()
+            $.getJSON("url", function(data, status) {
+                array = JSON.parse(data)
+                    //把接受到的数据数组放入页面中
+                for (var i = 0; i < array.length; i++) {
+                    var obj = array[i]
+                    $("#part" + i + 1 + "> #description1" + i + 1 + "> h4") = obj.description
+                    for (var j = 0; j < obj.content.length; j++) {
+                        $("#part" + i + 1 + "> #exercise" + i + 1 + ">dt").text(obj.content[j].title) //存放title
+                        $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:first").text(obj.content[j].option) //存放选项1
+                        $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:last").text(obj.content[j].option) //存放选项2
                     }
-                })
+                }
             })
-            //交卷
-            //遍历第一部分题目的每一个选项的选择
-            //这个一个JavaScript对象构造器，key-value对   形式{index:"",value=""}  分别代表题目，和用户选择的答案序号
+        })
+
+        //交卷
+        //遍历第一部分题目的每一个选项的选择
+        //这个一个JavaScript对象构造器，key-value对   形式{index:"",value=""}  分别代表题目，和用户选择的答案序号
         function answer(index, value) {
             this.index = index;
             this.value = value;
