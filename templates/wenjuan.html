@@ -4,8 +4,6 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<!-- 引入 Bootstrap -->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -14,30 +12,62 @@
 				<div class="mindtop"> <span class="swiper-button-prev swiper-button-blue"></span>
 					<h4>生活常识选择题及答案</h4>
 					<span class="swiper-button-next swiper-button-blue"></span> </div>
-				<div class="swiper-wrapper" id="part1">
-					<dl class="swiper-slide" id="number1">
+				<div id="part1">
+					<dl id="number1">
 						<dt>1、“大煮干丝”是哪个菜系的代表菜之一( )</dt>
 						<dd><label><input type="radio" name="1" value="1"/>A、四川菜系</label></dd>
 						<dd><label><input type="radio" name="1" value="2"/>B、山东菜系</label></dd>
 						<dd><label><input type="radio" name="1" value="3"/>C、广东菜系</label></dd>
 						<dd><label><input type="radio" name="1" value="4"/>D、淮扬菜系</label></dd>
 					</dl>
-					<dl class="swiper-slide" id="number2">
+					<dl id="number2">
 						<dt>2. 吃冰淇淋不解渴主要是因为它:</dt>
 						<dd><label><input type="radio" name="2" value="1"/>A、含蛋白质</label></dd>
 						<dd><label><input type="radio" name="2" value="2"/>B、含脂肪</label></dd>
-						<dd><label><input type="radio"  name="2" value="3"/>C、含糖</label></dd>
+						<dd><label><input type="radio" name="2" value="3"/>C、含糖</label></dd>
+					</dl>
+					<!-- ((div#ques-$>p+div.radio*2>label>input[type="radio" name="optionsRadios" value="option$"])+hr)*26 -->
+					<dl id="number-1">
+						<dt></dt>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option1"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option2"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option3"></label></dd>
+						<hr>
+					</dl>
+					<dl id="number-2">
+						<dt></dt>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option1"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option2"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option3"></label></dd>
+						<hr>
+					</dl>
+					<dl id="number-3">
+						<dt></dt>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option1"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option2"></label></dd>
+						<dd><label for=""><input type="radio" name="optionsRadios" value="option3"></label></dd>
+						<hr>
 					</dl>
 				</div>
 				<div class="fl-left" id="numok"><button>交卷</button></div>
 			</div>
 		</div>
 		
-		<script src="js/jquery.min.js"></script>
+		<script src="../static/js/jquery.min.js"></script>
 		<script type="text/javascript">
+			//页面从服务器加载json数据
+			$(document).ready(function(){
+				var array 
+				$.getJSON("",function(data,status){
+					array = JSON.parse(data)
+				})				
+			})
+
+
+
+
 			//交卷
             //遍历第一部分题目的每一个选项的选择
-            
             //这个一个JavaScript对象构造器，key-value对   形式{index:"",value=""}  分别代表题目，和用户选择的答案序号
             function answer(index,value) {
 				this.index = index;
