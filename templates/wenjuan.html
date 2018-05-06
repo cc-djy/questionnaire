@@ -3,11 +3,15 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title></title>
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <div class="main">
+    <div class="container center-block" style="width:0%">
         <div id="part1">
             <div id="description1">
                 <h4></h4>
@@ -497,12 +501,15 @@
         </div>
         <!-- (div#part$>(div#description$>h4)+div#exercise$>(dl#number$$>dt+(dd>label>input[type="radio",name="",value="$"])*3)*3)*3
         <!-- ((div#ques-$>p+div.radio*2>label>input[type="radio" name="optionsRadios" value="option$"])+hr)*26 -->
-        <div class="fl-left" id="numok"><button>交卷</button></div>
+        <div id="numok"><button class="btn btn-default" type="button">交卷</button></div>
     </div>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/jquery.min.js"></script>
     <script type="text/javascript">
         //页面从服务器加载json数据
         $(document).ready(function() {
+            alert(123)
             var array = new Array()
             $.getJSON("url", function(data, status) {
                 array = JSON.parse(data)
