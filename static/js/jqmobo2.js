@@ -57,7 +57,7 @@ function show_zhezhao_tip(g) {
         var b = window.notFinishTip.split(";");
         if (b.length == 2 && b[0].indexOf("http") == 0) { e = "<div style='width: 100%;height:80px; background-color: #e9f7ff; float: left;'><div style='float:left;margin-left:110px;font-size:14px; color: #6a696b; margin-top: 17px; line-height: 1.5;'>先领取<a onclick='return clickJp();' href='" + b[0] + "' style='text-decoration: underline; font-weight: bold;'>" + b[1] + "</a><br/>注满能量，再来填写吧！</div></div>"; }
         var h = "<div style='width:100%; height:100px; background-color: #ffffff;float: left;'><div style='float: right; height: 100%; padding:15px;'><h1 style='font-size: 16px; color: #840615; line-height: 2.5;'>亲，你的意见很重要哦！</h1><div style='padding: 0 10px; background-color: #2c87f7; font-size: 16px; color: #fff; line-height: 2; float: left; border-radius: 6px;' onclick='show_zhezhao_tip(false);'>继续填写</div><div style='padding: 0 10px; background-color: #ababab; font-size: 16px; color: #fff; line-height: 2; float: left; border-radius: 6px; margin-left: 30px;' onclick='closeTipWindow(true);'>放弃</div></div></div>";
-        var a = "<div class='popuptip' style='width:300px;background:#fff;border-radius: 4px;margin: auto;position: absolute; z-index: 9999;overflow: hidden;height:180px;'>" + h + e + "<img src='../../images/wjx/smile.png'/*tpa=https://www.wjx.cn/images/wjx/smile.png*/ alt='' width='80' style='position: absolute; top:20px; left:10px;'>";
+        var a = "<div class='popuptip' style='width:300px;background:#fff;border-radius: 4px;margin: auto;position: absolute; z-index: 9999;overflow: hidden;height:180px;'>" + h + e + "<img src='/images/wjx/smile.png' alt='' width='80' style='position: absolute; top:20px; left:10px;'>";
         "</div>";
         $("body").append('<div style="z-index:999;top: 0px;left: 0px;position: fixed;width: 100%;height: 100%;" id="zhezhaotip"><div style="position: absolute;top: 0px;left: 0px;width: 100%;height: 100%;opacity: 0.5;background-color: #000;"></div>' + a + "</div>");
         var f = $("html").height();
@@ -997,7 +997,7 @@ $(function() {
     processSearch();
 });
 
-function replaceImg(c) { var b = "http://pubimage.sojump.cn/"; var a = "http://pubalifr.sojump.cn/"; if (c.src.indexOf("http://pubssl.sojump.com/") == 0 || c.src.indexOf("https://pubssl.sojump.com") == 0 || c.src.indexOf("http://pubimage.sojump.com/") == 0) { c.src = c.src.replace("http://pubssl.sojump.com/", b).replace("https://pubssl.sojump.com", b).replace("http://pubimage.sojump.com/", b); } else { if (c.src.indexOf("http://pubalifr.sojump.com/") == 0 || c.src.indexOf("https://pubalifr.sojump.com") == 0 || c.src.indexOf("https://pubali.sojump.com") == 0 || c.src.indexOf("http://pubali.sojump.com/") == 0) { c.src = c.src.replace("http://pubalifr.sojump.com/", a).replace("https://pubalifr.sojump.com", a).replace("http://pubali.sojump.com/", a).replace("https://pubali.sojump.com", a); } } }
+function replaceImg(c) { var b = "http://pubimage.sojump.cn"; var a = "http://pubalifr.sojump.cn"; if (c.src.indexOf("http://pubssl.sojump.com") == 0 || c.src.indexOf("https://pubssl.sojump.com") == 0 || c.src.indexOf("http://pubimage.sojump.com") == 0) { c.src = c.src.replace("http://pubssl.sojump.com", b).replace("https://pubssl.sojump.com", b).replace("http://pubimage.sojump.com", b); } else { if (c.src.indexOf("http://pubalifr.sojump.com") == 0 || c.src.indexOf("https://pubalifr.sojump.com") == 0 || c.src.indexOf("https://pubali.sojump.com") == 0 || c.src.indexOf("http://pubali.sojump.com") == 0) { c.src = c.src.replace("http://pubalifr.sojump.com", a).replace("https://pubalifr.sojump.com", a).replace("http://pubali.sojump.com", a).replace("https://pubali.sojump.com", a); } } }
 var hasConfirmBtn = false;
 
 function showAnswer(b, d) {
@@ -1525,7 +1525,7 @@ function setVerifyCode() {
                     imgVerify.onclick = function() {
                         var h = new Date();
                         var e = h.getTime() + (h.getTimezoneOffset() * 60000);
-                        var f = window.location.host || "https://www.wjx.cn/joinnew/js/www.sojump.com";
+                        var f = window.location.host || "www.sojump.com";
                         var g = "//" + f + "/botdetect/" + activityId + ".aspx?get=image&c=" + this.captchaId + "&t=" + this.instanceId + "&d=" + e;
                         this.src = g;
                     };
@@ -1957,7 +1957,7 @@ function groupAnswer(q) {
         }
     } catch (x) {}
     var b = $("#form1").attr("action");
-    if (b.indexOf("https://www.wjx.cn/joinnew/js/aliyun.sojump.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/temp.sojump.com") > -1) { b = b.replace("https://www.wjx.cn/joinnew/js/aliyun.sojump.com", window.location.host).replace("https://www.wjx.cn/joinnew/js/temp.sojump.com", window.location.host); }
+    if (b.indexOf("aliyun.sojump.com") > -1 || b.indexOf("temp.sojump.com") > -1) { b = b.replace("aliyun.sojump.com", window.location.host).replace("temp.sojump.com", window.location.host); }
     var f = b + "&starttime=" + encodeURIComponent($("#starttime").val());
     var v = window.sojumpParm;
     if (!window.hasEncode) { v = encodeURIComponent(v); }
@@ -2015,7 +2015,7 @@ function groupAnswer(q) {
     if (window.isWeiXin) { f += "&iwx=1"; }
     f += "&t=" + new Date().valueOf();
     if ($("#shopcart")[0] && $("#shopcart")[0].style.display != "none") { f += "&ishop=1"; }
-    if (window.cProvince) { f += "&cp=" + encodeURIComponent(cProvince.replace("'", "")) + "&cc=" + encodeURIComponent(cCity.replace("'", "")) + "&ci=" + escape(cIp); var o = cProvince + "," + cCity; var r = window.location.host || "https://www.wjx.cn/joinnew/js/sojump.com"; try { setCookie("ip_" + cIp, o, null, "/", "", null); } catch (y) {} }
+    if (window.cProvince) { f += "&cp=" + encodeURIComponent(cProvince.replace("'", "")) + "&cc=" + encodeURIComponent(cCity.replace("'", "")) + "&ci=" + escape(cIp); var o = cProvince + "," + cCity; var r = window.location.host || "sojump.com"; try { setCookie("ip_" + cIp, o, null, "/", "", null); } catch (y) {} }
     debugLog("准备提交到服务器");
     $("#ctlNext").hide();
     var A = "处理中......";
@@ -2110,7 +2110,7 @@ function afterSubmit(v, m) {
     debugLog("提交成功");
     var o = v.split("〒");
     var h = o[0];
-    if (clientAnswerSend && h != 10 && h != 11) { try { saveSubmitAnswer(clientAnswerSend); } catch (r) {} }
+    if (clientAnswerSend && h != 10 && h != 11 && m != 3) { try { saveSubmitAnswer(clientAnswerSend); } catch (r) {} }
     if (h == 10) {
         if (maxCheatTimes > 0) {
             var s = new Date();
@@ -2118,7 +2118,7 @@ function afterSubmit(v, m) {
             setCookie(activityId + "_cheatTimes", 0, s.toUTCString(), "/", "", null);
         }
         var g = o[1];
-        var p = g.replace("https://www.wjx.cn/joinnew/js/complete.aspx", "https://www.wjx.cn/joinnew/js/completemobile2.aspx").replace("?q=", "?activity=").replace("&joinid=", "&joinactivity=").replace("&JoinID=", "&joinactivity=");
+        var p = g.replace("complete.aspx", "completemobile2.aspx").replace("?q=", "?activity=").replace("&joinid=", "&joinactivity=").replace("&JoinID=", "&joinactivity=");
         if (window.isDingDing) { p += "&dd_nav_bgcolor=FF5E97F6"; if (window.ddcorpid) { p += "&ddpid=" + encodeURIComponent(ddcorpid); } }
         if (window.isYdb) { p += "&ydb=1"; }
         if (window.isPvw) { p += "&pvw=1"; }
@@ -2160,7 +2160,7 @@ function afterSubmit(v, m) {
         if (h == 11) {
             var n = o[1];
             if (!n) { n = window.location.href; } else { if (n.toLowerCase().indexOf("http://") == -1 && n.toLowerCase().indexOf("https://") == -1) { n = "http://" + n; } }
-            n = n.replace("http://r.sojump.net.cn/", "http://r.sojump.cn/");
+            n = n.replace("http://r.sojump.net.cn", "http://r.sojump.cn");
             var x = o[3] || "";
             var k = o[4] || "";
             var u = false;
@@ -2186,7 +2186,7 @@ function afterSubmit(v, m) {
                 if (n.indexOf("?") > -1) { n += "&"; } else { n += "?"; }
                 n += "parterjoiner=" + encodeURIComponent(parterjoiner);
             }
-            if (n.indexOf("https://www.wjx.cn/joinnew/js/www.sojump.com") > -1) { n = n.replace("/jq/", "/m/"); }
+            if (n.indexOf("www.sojump.com") > -1) { n = n.replace("/jq/", "/m/"); }
             var t = o[2];
             var f = 1000;
             if (t && window.jiFenBao == 0 && t != "不提示" && !window.sojumpParm) {
@@ -2571,7 +2571,7 @@ function to_next_page() {
     $("#divMatrixHeader").hide();
 }
 
-function processSearch() { if (!document.referrer) { return; } var b = document.referrer; var a = false; if (b.indexOf("https://www.wjx.cn/joinnew/js/baidu.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/google.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/so.360.cn") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/.so.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/.sogou.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/.soso.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/.haoso.com") > -1 || b.indexOf("https://www.wjx.cn/joinnew/js/.sm.cn") > -1) { a = true; } if (a) { $("#divSearch").show().html('<a href="https://www.wjx.cn/mobile/publicsurveys.aspx" style="color:#66beff;">搜索更多相关问卷模板</a>'); } }
+function processSearch() { if (!document.referrer) { return; } var b = document.referrer; var a = false; if (b.indexOf("baidu.com") > -1 || b.indexOf("google.com") > -1 || b.indexOf("so.360.cn") > -1 || b.indexOf(".so.com") > -1 || b.indexOf(".sogou.com") > -1 || b.indexOf(".soso.com") > -1 || b.indexOf(".haoso.com") > -1 || b.indexOf(".sm.cn") > -1) { a = true; } if (a) { $("#divSearch").show().html('<a href="https://www.wjx.cn/mobile/publicsurveys.aspx" style="color:#66beff;">搜索更多相关问卷模板</a>'); } }
 
 function initSlider() {
     if (window.hasSlider) {
