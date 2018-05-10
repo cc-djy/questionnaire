@@ -18,7 +18,9 @@
     python manage.py migrate
     ```
 
-5. 命令端口运行项目
+5. 读题目,运行 test_paper 文件夹中的 test.py 文件(注意linux与win的换行区别,此处的正则式要用win的换行)
+
+6. 命令端口运行项目
     ```bash
     python manage.py runserver
     ```

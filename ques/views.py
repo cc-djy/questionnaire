@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
-from .models import Ques
+# from .models import Ques
 
 
 # Create your views here.
@@ -10,7 +10,8 @@ from .models import Ques
 def index(request):
     # 读取题目
     context = {}
-    context['topics'] = Ques.objects.all()
+    # context['topics'] = Ques.objects.all()
 
     # 读取数据库等 并渲染到网页
     return render(request, 'index.html', context)
+
