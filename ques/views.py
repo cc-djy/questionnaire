@@ -1,17 +1,76 @@
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
-# from .models import Ques
+from .models import TestPaper, QuestionType, Question, Option
 
 
-# Create your views here.
-
-
-@cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
+# @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
 def index(request):
-    # 读取题目
-    context = {}
-    # context['topics'] = Ques.objects.all()
+    '''
+        关于index页面的视图,以及交给模板的字典格式如下:
+        {
+            "paper_name":""
+            "question_types":
+            [
+                "description":"",
+                "questions":
+                [
+                    {
+                    "id":int
+                    "title":"",
+                    "options":
+                        [
 
-    # 读取数据库等 并渲染到网页
+                        ]
+                    },{},{},...
+                ]
+            ]
+        },{},{},...
+    '''
+    context = {}  # 页面内容上下文
+
+    test_paper = TestPaper.objects.filter(paper_id=1)  # 读取问卷
+    context['paper_name'] = test_paper[0].paper_name
+
+    question_types = QuestionType.objects.filter(paper_id=test_paper[0].paper_id)  # 读取问题类型
+    context['question_types'] = []
+
+    question_id = 1
+
+    # 循环读取问题类型
+    for question_type in question_types:
+        # 问题类型字典
+        question_type_dict = {
+            'description': question_type.description,
+            "questions": []
+        }
+
+        questions = Question.objects.filter(question_type_id=question_type.question_type_id)  # 读取问题
+
+        # 循环读取问题
+        for question in questions:
+            # 问题字典
+            question_dict = {
+                'id': question_id,
+                'title': question.question_description,
+                'options': []
+            }
+
+            options = Option.objects.filter(question_id=question.question_id)  # 读取选项
+            option_id = 1
+
+            # 循环读取选项
+            for option in options:
+                option.option_id = (chr(64 + option_id))
+                question_dict['options'].append(option) # 将选项放进问题字典
+                option_id += 1
+
+            # 将问题方法进问题字典
+            question_type_dict['questions'].append(question_dict)
+            question_id += 1
+
+
+        # 将问题类型字典放进context
+        context['question_types'].append(question_type_dict)
+
+
     return render(request, 'index.html', context)
-
