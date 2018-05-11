@@ -1,71 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>
-    第一部分
-</h2>
-<h4>
-    哪一答案最接近地描述了你通常的思考和行为方式
-</h4>
 
-{% for topic in topics %}
+{{ paper_name }}
+
+
 <form>
-    <div>
-        <p>{{topic.title}}</p>
+    {% for question_type in question_types %}
+    <h2>{{ question_type.description }}</h2>
+    {% for question in question_type.questions %}
+    <div class="question-{{ question.id }}">
+        <p>{{question.id}}.{{question.title}}</p>
+        {% for option in question.options %}
         <div class="radio">
             <label>
-                <input type="radio" name="optionsRadios" value="option1">
-                {{topic.option1}}
+                <input type="radio" name="optionsRadios" value="option">
+                {{option.option_id}}
+                {{option.option_description}}
             </label>
         </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option2">
-                {{topic.option2}}
-            </label>
-        </div>
+        {% empty %}
+        <p>-- 暂无内容，敬请期待 --</p>
+        {% endfor %}
     </div>
     <hr>
-    {% empty %}
-    <p>-- 暂无内容，敬请期待 --</p>
+    {% endfor %}
     {% endfor %}
 
-    <div>
-        <p>1、当你某日想去某个地方，你会 ？</p>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option1" checked>
-                A.计划好将做的事情以及何时做
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option2">
-                B.什么都不想就去
-            </label>
-        </div>
-    </div>
-    <hr>
-    <div>
-        <p>1、当你某日想去某个地方，你会 ？</p>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option1" checked>
-                A.计划好将做的事情以及何时做
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option2">
-                B.什么都不想就去
-            </label>
-        </div>
-    </div>
-    <hr>
-
-    <button type="submit" class="btn btn-default">Submit</button>
-
-    <!--下面这个是大概的生成规则-->
-    <!--((div#ques-$>p+div.radio*2>label>input[type="radio" name="optionsRadios" value="option$"])+hr)*26-->
 </form>
 {% endblock %}

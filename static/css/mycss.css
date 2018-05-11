@@ -1,0 +1,221 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-size: 16px;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    font-family: "Microsoft Yahei", helvetica;
+    background: #f7f7f7;
+    color: #333;
+    position: relative;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.header_left {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 60px;
+    height: 50px;
+}
+
+#toptitle {
+    background-color: #1ea0fa;
+    padding: 12px 10px;
+    width: 100%;
+    color: #ffffff;
+}
+
+#toptitle .htitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+div.formfield {
+    display: block;
+    padding: 15px 5px 15px;
+    margin: 0px 5px 10px;
+    clear: both;
+    border-bottom: 1px dotted #ccc;
+}
+
+span.description {
+    font-size: 90%;
+}
+
+fieldset {
+    border: none;
+}
+
+div.field {
+    clear: both;
+    margin: 4px 5px;
+    padding: 0 7px;
+    border: 2px solid #f7f7f7;
+}
+
+div.field-label {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin: 10px 0 10px 0 !important;
+    display: block;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+#divQuestion {
+    padding-top: 10px;
+}
+
+a,
+button,
+label,
+textarea,
+div,
+select,
+option {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+span.req {
+    color: red !important;
+    margin: 2px 0 0 2px;
+}
+
+.ui-controlgroup {
+    margin: 5px 0;
+    padding: 0;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+}
+
+.ui-controlgroup .ui-radio,
+.ui-controlgroup .ui-checkbox,
+.ui-controlgroup .ui-li-static {
+    background: none repeat scroll 0 0 #fff;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 16px;
+    min-height: 43px;
+    position: relative;
+}
+
+.ui-controlgroup .ui-radio:first-child,
+.ui-controlgroup .ui-checkbox:first-child,
+.ui-controlgroup .ui-li-static:first-child {
+    border-radius: 4px 4px 0 0;
+}
+
+.ui-controlgroup .ui-radio:last-child,
+.ui-controlgroup .ui-checkbox:last-child,
+.ui-controlgroup .ui-li-static:last-child {
+    border-radius: 0 0 4px 4px;
+    border-bottom: 0 solid #d5d5d5;
+}
+
+.ui-controlgroup .ui-radio .label,
+.ui-controlgroup .ui-checkbox .label,
+.ui-controlgroup .ui-radio label,
+.ui-controlgroup .ui-checkbox label {
+    display: block;
+    margin-left: 40px;
+    padding: 12px 10px 10px 0;
+    cursor: pointer;
+}
+
+.jqradiowrapper,
+.jqcheckwrapper {
+    display: block;
+    float: left;
+    margin: 11px 4px 10px 11px;
+}
+
+.errorMessage {
+    color: Red;
+    min-height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+}
+
+input {
+    outline: none;
+}
+
+.jqradio {
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 50px;
+    display: inline-block;
+    position: relative;
+}
+
+.jqradiowrapper a.jqchecked {
+    background-color: #53a4f4;
+    color: #99a1a7;
+    border: 1px solid #53a4f4;
+}
+
+.jqradiowrapper a.jqchecked:after {
+    content: ' ';
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    position: absolute;
+    top: 4px;
+    background: #fff;
+    text-shadow: 0px;
+    left: 4px;
+    font-size: 32px;
+}
+
+a.jqcheck {
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+}
+
+.jqcheckwrapper a.jqchecked {
+    background-color: #53a4f4!important;
+    background: url("/images/checkedbox.png") no-repeat scroll center top transparent;
+    ;
+    background-size: cover;
+    display: block;
+    height: 21px;
+    vertical-align: middle;
+    width: 21px;
+    border: none;
+}
+
+.jqradiowrapper,
+.jqcheckwrapper {
+    display: block;
+    float: left;
+    margin: 11px 4px 10px 11px;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+    color: #45AFE3;
+}
