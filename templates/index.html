@@ -7,24 +7,24 @@
 
 <form>
     {% for question_type in question_types %}
-    <h2>{{ question_type.description }}</h2>
-    {% for question in question_type.questions %}
-    <div class="question-{{ question.id }}">
-        <p>{{question.question_id}}.{{question.title}}</p>
-        {% for option in question.options %}
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="option">
-                {{option.option_id}}
-                {{option.option_description}}
-            </label>
-        </div>
-        {% empty %}
-        <p>-- 暂无内容，敬请期待 --</p>
+        <h2>{{ question_type.description }}</h2>
+        {% for question in question_type.questions %}
+            <div class="question-{{ question.id }}">
+                <p>{{question.question_id}}.{{question.title}}</p>
+                    {% for option in question.options %}
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="optionsRadios" value="option">
+                                {{option.option_id}}
+                                {{option.option_description}}
+                            </label>
+                        </div>
+                    {% empty %}
+                    <!--<p>&#45;&#45; 暂无内容，敬请期待 &#45;&#45;</p>-->
+                {% endfor %}
+            </div>
+            <hr>
         {% endfor %}
-    </div>
-    <hr>
-    {% endfor %}
     {% endfor %}
 
 </form>

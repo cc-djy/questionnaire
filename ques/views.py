@@ -20,7 +20,10 @@ def index(request):
                     "title":"",
                     "options":
                         [
-
+                            {
+                                'option_id': "",
+                                'option_description': ""
+                            },{},{},...
                         ]
                     },{},{},...
                 ]
@@ -57,21 +60,21 @@ def index(request):
             }
 
             options = Option.objects.filter(question_id=question.question_id)  # 读取选项
-            option_id = 1
 
+            option_id = 1
             # 循环读取选项
             for option in options:
-                option.option_id = (chr(64 + option_id))
-                question_dict['options'].append(option) # 将选项放进问题字典
+                question_dict['options'].append({
+                    'option_id': chr(64 + option_id),
+                    'option_description': option.option_description
+                })  # 将选项放进问题字典
                 option_id += 1
 
             # 将问题方法进问题字典
             question_type_dict['questions'].append(question_dict)
             question_id += 1
 
-
         # 将问题类型字典放进context
         context['question_types'].append(question_type_dict)
-
 
     return render(request, 'index.html', context)
