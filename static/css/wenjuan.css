@@ -80,3 +80,7 @@ span.description {
 .errormessage {
     display: none
 }
+
+th {
+    background-color: #F7F7F7;
+}
