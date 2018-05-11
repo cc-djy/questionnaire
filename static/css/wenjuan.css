@@ -41,3 +41,42 @@ span.description {
     padding: 0px 15px;
     cursor: pointer;
 }
+
+#part2 tr>th>p {
+    margin-bottom: 0px;
+    height: 42px;
+    text-align: center;
+    padding: 10px 0px !important;
+}
+
+.button {
+    width: 100%;
+    display: block;
+    margin: 10px 0px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    padding: 9px 0px 9px;
+    border-radius: .2em;
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
+.blue {
+    color: #F7F7F7;
+    background: #1ea0fa;
+}
+
+.errormessage {
+    display: none
+}
