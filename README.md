@@ -1,5 +1,5 @@
 # questionnaire
-问卷系统(2018.5.5 6:49更新)
+问卷系统(2018.5.11更新)
 
 # 关于:如何运行从git下载来的项目
 
@@ -14,7 +14,7 @@
 
 4. 同步数据库
     ```bash
-    python manage.py makemigrations
+    python manage.py makemigrations <app_name>
     python manage.py migrate
     ```
 
@@ -22,21 +22,38 @@
 
 6. 命令端口运行项目
     ```bash
-    python manage.py runserver
+    python manage.py runserver [port]
     ```
     
-# 目前对这个项目的分割
+# 关于:如何在命令行模式下，使用git命令clone和push项目到dev分支
+> @worksg 一下命令需要更改使用人名称和邮箱以及git项目的路径，切勿直接复制粘贴
+
+	
+	git config --global user.email "571940753@qq.com" #配置git邮箱信息
+	git config --global user.name "worksg" #配置git维护者信息
+
+	git clone https://github.com/worksg/questionnaire.git	#克隆仓库到本地
+
+	git remote -v #命令列出所有远程主机及其网址
+	git branch #查看当前HEAD所处分支
+	git checkout -b dev origin/dev #在origin/dev的基础上，创建一个本地新分支[dev]并切换进去
+
+	git add <file_or_filepath>	# add
+	git commit -m "<your_comment>"	# commit
+	git push -u origin dev	# push
+
+# 项目结构
 
 ![untitled diagram](https://user-images.githubusercontent.com/24842631/39669156-92a82184-5116-11e8-9e02-4b176dd249a5.png)
 
 
-1.   **前端展示模块** @AntonioShi ，优化样式，主要是base.html 与 index.html 
+1. **前端展示模块** @AntonioShi ，优化样式，主要是base.html 与 index.html
 
 2. **django模块** @worksg ，写好响应用户的逻辑，接收用户的表单，并将用户信息存到数据库
 
-4. **数据库模块** @worksg ，设计好数据库的结构，在学校服务器试着部署一下数据库，然后远程连接调试
+3. **数据库模块** @worksg ，设计好数据库的结构，在学校服务器试着部署一下数据库，然后远程连接调试
 
-5. **读题目模块** @uouobba , 将问卷的那个文档读到数据库
+4. **读题目模块** @uouobba , 将问卷的那个文档读到数据库
 
 # 关于为什么这样分割模块
 1. 因为这样耦合度应该会比较低。
@@ -46,11 +63,15 @@
 1. 微信接口方面，了解一下微信接口怎么弄？ @xxx-032 
 2. 讨论一下用什么数据库？
 3. 关于计算分数的模块，是否可以考虑一下在前端计算？
+> @worksg 之前已经考虑过在前端做分数计算，但目前还是不打算在前端做分数的计算过程，目前放在后端做分数评价主要因为分数计算模块需要从数据库中提取题目id和选项id，而后再拼接成JSON格式，此时已经完全可以在后端做计算，如果放在前端需要在前端另外设计获取此类资源的JSON请求方式，同时将数据库的有关信息嵌在网页中，只能说放在前端计算有点多此一举，另一方面前端不完全受控于服务器，前端的返回结果不受信任，有可能会随意生成用户的评价分数然后写进数据库
 
 # 数据库设计
 ![untitled diagram](https://user-images.githubusercontent.com/24842631/39868835-e4a1784e-548d-11e8-978b-2e70cd8efdf9.png)
 
-# 从文字插入数据库
+代码记录
+===
+
+## 从文字插入数据库 [仅供参考]
 ```python
 import sqlite3
 import re
@@ -125,27 +146,30 @@ conn.close()
 
 ```
 
-# 服务器返回给前端页面的json格式
+## 服务器返回给前端页面的json封装格式 [仅供参考]
 ```json
-        {
-            "paper_name":""
-            "question_types":
-            [
-                "question_type_id":int
-                "description":"",
-                "questions":
+{
+    "paper_name":""
+    "question_types":
+    [
+        "question_type_id":int
+        "description":"",
+        "questions":
+        [
+            {
+            "question_id":int
+            "title":"",
+            "options":
                 [
                     {
-                    "question_id":int
-                    "title":"",
-                    "options":
-                        [
-
-                        ]
+                        'option_id': "",
+                        'option_description': ""
                     },{},{},...
                 ]
-            ]
-        },{},{},...
+            },{},{},...
+        ]
+    ]
+},{},{},...
 ```
 
 ```python
@@ -194,7 +218,7 @@ for item in Subject_TypeId:
 print(all_ques)
 ```
 
-# 提交给服务器的json格式
+## 前端提交给服务器的json封装格式 [仅供参考]
 ```json
 [
 	{
@@ -203,11 +227,30 @@ print(all_ques)
 	},{},{},..
 ]
 ```
+## 插入索引 [仅供参考]
+{"题目索引_1":("题目id_1",{"选项索引_1":("选项id_1",[]),"选项索引_2":("选项id_2",[]),...}),...}
 
-# 插入索引 [弃用]
-{"题目索引_1":("题目id_1",{"选项索引_1":"选项id_1","选项索引_2":"选项id_2",...}),...}
+```python
+PaperName = TestPaper.objects.filter(PaperID=1)
+Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
+ques_id = 1
+all_ques = {}
+for item in Subject_TypeId:
+  Dict_1 = {}
+  QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
+  for items in QuestionId:
+    Dict_2 = {ques_id: (items.QuestionId, {})}
+    OptionID = Option.objects.filter(QuestionId=items.QuestionId)
+    option_id = 1
+    for itemss in OptionID:
+      Dict_2[ques_id][1].update({option_id: (itemss.OptionID,[])})
+      option_id += 1
+    Dict_1.update(Dict_2)
+    ques_id += 1
+  all_ques.update(Dict_1)
+```
 
-# 评价规则
+## 评价规则 [仅供参考]
 {"题目索引_1"：{"选项id_1":[],"选项id_2":[],...},...}
 
 ```python
@@ -262,29 +305,6 @@ for i in range(1, sum + 1):
     y += 1
 
 print(ques_ans)
-```
-
-# 插入索引_v2
-{"题目索引_1":("题目id_1",{"选项索引_1":("选项id_1",[]),"选项索引_2":("选项id_2",[]),...}),...}
-
-```python
-PaperName = TestPaper.objects.filter(PaperID=1)
-Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
-ques_id = 1
-all_ques = {}
-for item in Subject_TypeId:
-  Dict_1 = {}
-  QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
-  for items in QuestionId:
-    Dict_2 = {ques_id: (items.QuestionId, {})}
-    OptionID = Option.objects.filter(QuestionId=items.QuestionId)
-    option_id = 1
-    for itemss in OptionID:
-      Dict_2[ques_id][1].update({option_id: (itemss.OptionID,[])})
-      option_id += 1
-    Dict_1.update(Dict_2)
-    ques_id += 1
-  all_ques.update(Dict_1)
 ```
 
 pycharm专业版与社区版的区别
