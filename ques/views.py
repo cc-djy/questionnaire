@@ -11,11 +11,12 @@ def index(request):
             "paper_name":""
             "question_types":
             [
+                "question_type_id":int
                 "description":"",
                 "questions":
                 [
                     {
-                    "id":int
+                    "question_id":int
                     "title":"",
                     "options":
                         [
