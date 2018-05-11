@@ -10,7 +10,7 @@
     <h2>{{ question_type.description }}</h2>
     {% for question in question_type.questions %}
     <div class="question-{{ question.id }}">
-        <p>{{question.id}}.{{question.title}}</p>
+        <p>{{question.question_id}}.{{question.title}}</p>
         {% for option in question.options %}
         <div class="radio">
             <label>
