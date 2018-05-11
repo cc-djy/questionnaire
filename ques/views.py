@@ -41,6 +41,7 @@ def index(request):
     for question_type in question_types:
         # 问题类型字典
         question_type_dict = {
+            'question_type_id':question_type.question_type_id,
             'description': question_type.description,
             "questions": []
         }
@@ -51,7 +52,7 @@ def index(request):
         for question in questions:
             # 问题字典
             question_dict = {
-                'id': question_id,
+                'question_id': question_id,
                 'title': question.question_description,
                 'options': []
             }
