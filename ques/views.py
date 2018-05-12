@@ -213,12 +213,12 @@ def result(request):
 
         # 对选项A进行处理
         for i in position['A']:
-            if 'A' == request.POST[str(i)]:
+            if 'A' == request.POST["option" + str(i)]:
                 position["score"] += 1
 
         # 对选项B进行处理
         for i in position['B']:
-            if 'B' == request.POST[str(i)]:
+            if 'B' == request.POST["option" + str(i)]:
                 position["score"] += 1
 
         # 将分数装好，传给模板页面
