@@ -132,3 +132,23 @@ table {
     border-color: #F7F7F7;
     border-width: 2px;
 }
+
+
+/* #part2 tr>th:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#part2 tr>th:first-child>p {
+    position: relative;
+    margin: auto;
+} */
+
+#part2 table tr>th:even {
+    background-color: red
+}
+
+#part2 table>tr:nth-child(odd) {
+    background-color: blue
+}
