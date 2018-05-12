@@ -82,10 +82,6 @@
         color: red;
     }
     
-    th {
-        background-color: #F7F7F7;
-    }
-    
     .scrolltop {
         display: block;
         position: fixed;
@@ -127,24 +123,20 @@
         background: white;
     }
     
+    #part1 table th {
+        background-color: #F9F9F9;
+    }
+    
+    #part3 table th {
+        background-color: #F9F9F9;
+    }
+    
     table {
         border-style: solid;
         border-color: #F7F7F7;
         border-width: 2px;
     }
     
-    #part2 table tr {
-        border-style: solid;
-        border-color: #F7F7F7;
-        border-width: 2px;
+    #part2 table {
+        margin-bottom: 2px;
     }
-    /* #part2 tr>th:first-child {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#part2 tr>th:first-child>p {
-    position: relative;
-    margin: auto;
-} */

@@ -1,8 +1,7 @@
 $(document).ready(function() {
-    $("#part2 table tr>th:even").css("background-color", "#F9F9F9");
-    $("#part2 table tr>th:odd").css("background-color", "#FFFFFF");
-    var array = $("#part1 table,#part2 table tr,#part3 table");
-    alert(array.size());
+    $("#part2 table:even").css("background-color", "#F9F9F9");
+    $("#part2 table:odd").css("background-color", "#FFFFFF");
+    var array = $("#part1 table,#part2 table,#part3 table");
     $("#bt").click(function() {
         var m = 0;
         var flag = true;
@@ -14,13 +13,8 @@ $(document).ready(function() {
                     m = i;
                     flag = false;
                 }
-                if ($("#" + id).prop("tagName") == "TR") {
-                    $("#" + id).css("border-color", "red");
-                    $("#" + id).prev().css("border-bottom-color", "red");
-                } else {
-                    $("#" + id).css("border-color", "red");
-                    $("#" + id + " .errormessage").css("visibility", "visible");
-                }
+                $("#" + id).css("border-color", "red");
+                $("#" + id + " .errormessage").css("visibility", "visible");
             }
         }
 
@@ -40,18 +34,10 @@ $(document).ready(function() {
     });
 
     $(":radio").click(function() {
-        alert($(this).parents("#part2"));
-        if (1 != null) {
-            alert(132);
-            $(this).css("border-color", "#F7F7F7");
-            $(this).prev().css("border-bottom-color", "#F7F7F7");
-        } else {
-            alert(556);
-            var flag = $(this).parents("table").css("border");
-            if (flag != null) {
-                $(this).parents("table").css("border-color", "#F7F7F7");
-                $(this).parents("tr").nextAll().last().css("visibility", "hidden");
-            }
+        var flag = $(this).parents("table").css("border");
+        if (flag != null) {
+            $(this).parents("table").css("border-color", "#F7F7F7");
+            $(this).parents("tr").nextAll().last().css("visibility", "hidden");
         }
     });
 
