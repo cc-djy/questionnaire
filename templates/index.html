@@ -2,30 +2,30 @@
 
 {% block content %}
 
-{{ paper_name }}
-
-
-<form>
+<form class="{{ paper_name }}">
     {% for question_type in question_types %}
-        <h2>{{ question_type.description }}</h2>
-        {% for question in question_type.questions %}
-            <div class="question-{{ question.id }}">
-                <p>{{question.question_id}}.{{question.title}}</p>
-                    {% for option in question.options %}
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="optionsRadios" value="option">
-                                {{option.option_id}}
-                                {{option.option_description}}
-                            </label>
-                        </div>
-                    {% empty %}
-                    <!--<p>&#45;&#45; 暂无内容，敬请期待 &#45;&#45;</p>-->
-                {% endfor %}
-            </div>
-            <hr>
-        {% endfor %}
-    {% endfor %}
 
+    <h2 class="{{ question_type.question_type_id }}">
+        {{ question_type.description }}
+    </h2>
+
+    {% for question in question_type.questions %}
+
+    <div class="question-{{ question.question_id }}">
+        <p>{{question.question_id}}.{{question.title}}</p>
+        {% for option in question.options %}
+        <div class="radio ">
+            <label>
+                <input type="radio" name="optionsRadios-{{question.question_id}}" value="option-{{option.option_id}}">
+                {{option.option_id}}
+                {{option.option_description}}
+            </label>
+        </div>
+        {% endfor %}
+        <hr>
+        {% endfor %}
+        {% endfor %}
+        <button type="submit"></button>
+    </div>
 </form>
 {% endblock %}
