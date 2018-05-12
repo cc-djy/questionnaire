@@ -67,6 +67,7 @@ def index(request):
             for option in options:
                 question_dict['options'].append({
                     'option_id': chr(64 + option_id),
+                    'option_num_id':option_id,
                     'option_description': option.option_description
                 })  # 将选项放进问题字典
                 option_id += 1

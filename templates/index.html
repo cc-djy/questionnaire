@@ -2,30 +2,102 @@
 
 {% block content %}
 
-<form class="{{ paper_name }}">
-    {% for question_type in question_types %}
-
-    <h2 class="{{ question_type.question_type_id }}">
-        {{ question_type.description }}
-    </h2>
-
-    {% for question in question_type.questions %}
-
-    <div class="question-{{ question.question_id }}">
-        <p>{{question.question_id}}.{{question.title}}</p>
-        {% for option in question.options %}
-        <div class="radio ">
-            <label>
-                <input type="radio" name="optionsRadios-{{question.question_id}}" value="option-{{option.option_id}}">
-                {{option.option_id}}
-                {{option.option_description}}
-            </label>
+<form class="{{ paper_name }}" action="">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p>{{ question_types.0.description }}</p>
         </div>
-        {% endfor %}
-        <hr>
-        {% endfor %}
-        {% endfor %}
-        <button type="submit"></button>
+        <div id="part1">
+            {% for question in question_types.0.questions %}
+            <table class="table" id="div{{ question.question_id }}">
+                <th>{{ question.question_id }}.{{ question.title }}</th>
+                {% for option in question.options %}
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <input type="radio" name="option{{ question.question_id }}"
+                                   id="option{{ question.question_id }}_{{option.option_num_id}}"
+                                   value="{{option.option_id}}">
+                            <label for="option{{ question.question_id }}_{{option.option_num_id}}">
+                                {{ option.option_id }}.
+                                {{ option.option_description }}
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr class="errormessage">
+                    <td style="width: 1200px;">请选择选项
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
+
+        </div>
     </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p>{{ question_types.1.description }}</p>
+        </div>
+        <div id="part2">
+            <table class="table table-striped" id="div9">
+                {% for question in question_types.1.questions %}
+                <tr>
+                    <th>
+                        <p>{{ question.question_id }}.</p>
+                    </th>
+                    {% for option in question.options %}
+                    <td>
+                        <div class="radio">
+                            <input type="radio" name="radio{{ question.question_id }}" id="radio{{ question.question_id }}" value="option{{option.option_num_id}}">
+                            <label for="radio{{ question.question_id }}">
+                                {{ option.option_id }}.
+                                {{ option.option_description }}
+                            </label>
+                        </div>
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p>{{ question_types.2.description }}</p>
+        </div>
+        <div id="part3">
+            {% for question in question_types.2.questions %}
+            <table class="table" id="div{{question.question_id }}">
+                <th>{{ question.question_id }}.{{ question.title }}</th>
+                {% for option in question.options %}
+                <tr>
+                    <td>
+                        <div class="radio">
+                            <input type="radio" name="option{{ question.question_id }}"
+                                   id="option{{question.question_id }}_{{option.option_num_id}}"
+                                   value="{{option.option_id}}">
+                            <label for="option{{ question.question_id }}_{{option.option_num_id}}">
+                                {{ option.option_id }}.
+                                {{ option.option_description }}
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr class="errormessage">
+                    <td style="width: 1200px;">请选择选项
+                    </td>
+                </tr>
+            </table>
+            {% endfor %}
+
+        </div>
+    </div>
+    <a id="bt" href="javascript:;" class="button blue">提交</a>
 </form>
+
 {% endblock %}
