@@ -27,7 +27,7 @@
     </div>
     <div class="container">
         <div id="divQuestion1">
-            <form action="/result/" method="post">
+            <form action="/result/" method="post" id="form1">
                 {% csrf_token %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -112,7 +112,7 @@
                                     <div class="radio">
                                         <input type="radio" name="option{{ question.question_id }}"
                                                id="option{{question.question_id }}_{{option.option_num_id}}"
-                                               value="{{option.option_id}}" checked>
+                                               value="{{option.option_id}}">
                                         <label for="option{{ question.question_id }}_{{option.option_num_id}}">
                                             {{ option.option_id }}.{{ option.option_description }}
                                         </label>
@@ -129,7 +129,7 @@
 
                     </div>
                 </div>
-                <button type="submit" id="bt" href="javascript:;" class="button blue">提交</button>
+                <a id="bt" href="javascript:;" class="button blue">提交</a>
 
             </form>
 
