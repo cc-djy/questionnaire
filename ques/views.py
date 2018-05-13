@@ -243,7 +243,7 @@ def result(request):
     # 计算，你属于哪一种人格
     character = ""
     for i in range(0, 8, 2):
-        if context['score'][i] < context['score'][i + 1]:
+        if context['score'][i] > context['score'][i + 1]:
             character += positions[i]['name']
         else:
             character += positions[i + 1]['name']
