@@ -1,5 +1,5 @@
 # questionnaire
-问卷系统(2018.5.11更新)
+问卷系统(2018.5.13更新)
 
 # 关于:如何运行从git下载来的项目
 
@@ -239,7 +239,7 @@ Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
 ques_id = 1
 all_ques = {}
 for item in Subject_TypeId:
-  Dict_1 = {}
+    Dict_1 = {}
   QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
   for items in QuestionId:
     Dict_2 = {ques_id: (items.QuestionId, {})}
@@ -254,7 +254,21 @@ for item in Subject_TypeId:
 ```
 
 ## 评价规则 [仅供参考]
-{"题目索引_1"：{"选项id_1":[],"选项id_2":[],...},...}
+模板页面的表单为：
+```json
+{
+  "option1":"A"，
+  "option2":"B",
+  ,,,,
+}
+```
+交给模板页面的字典为：
+```json
+{
+  "name":"",
+  "description":"",
+}
+```
 
 ```python
 Extroversion = {"A": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83), "B": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91)} # E
