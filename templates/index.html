@@ -73,11 +73,11 @@
                         {% for question in question_types.1.questions %}
                         <table class="table" id="div{{question.question_id}}">
                             <tr>
-                                <th>
+                                <th style="width: 16%">
                                     <p>{{ question.question_id }}.</p>
                                 </th>
                                 {% for option in question.options %}
-                                <td>
+                                <td style="width: 42%">
                                     <div class="radio">
                                         <input type="radio" name="option{{ question.question_id }}"
                                                id="radio{{ question.question_id }}_{{option.option_num_id}}"
@@ -135,6 +135,9 @@
 
             <a href="javascript:;" class="scrolltop" style="display:none;"></a>
         </div>
+    </div>
+    <div id="divPowerBy" style="margin: 0 auto;" class="logofooter">
+        <div class='wjfooter'><span id='spanPower'>DGUT提供技术支持</span></div>
     </div>
 </div>
 
