@@ -31,7 +31,7 @@ $(document).ready(function() {
             });
         }
         if (flag) {
-            $("#from1").submit();
+            $("#form1").submit();
         }
     });
 
