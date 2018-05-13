@@ -11,7 +11,7 @@
     }
     
     #toptitle {
-        background-color: #99CD00;
+        background-color: #0099FF;
         padding: 12px 10px;
         width: 100%;
         color: #ffffff;
@@ -75,7 +75,7 @@
     
     .blue {
         color: #F7F7F7;
-        background: #1ea0fa;
+        background: #0099FF;
     }
     
     .errormessage {
@@ -142,4 +142,27 @@
     
     #part2 table {
         margin-bottom: 2px;
+    }
+    
+    .logofooter {
+        background-color: #4b4b4b;
+        float: left;
+        width: 100%;
+    }
+    
+    .fixedbottom {
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        position: fixed;
+        width: 100%;
+    }
+    
+    .wjfooter {
+        height: 30px;
+        line-height: 30px;
+        margin: 5px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
     }
