@@ -30,7 +30,14 @@ $(document).ready(function() {
                 $(".scrolltop").hide();
             });
         }
+        if (flag) {
+            check();
+        }
     });
+
+    function check() {
+        return true;
+    }
 
     $(":radio").click(function() {
         var flag = $(this).parents("table").css("border");
