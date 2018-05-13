@@ -13,11 +13,10 @@ $(document).ready(function() {
                     m = i;
                     flag = false;
                 }
-                $("#" + id).css("border-color", "red");
+                $("#" + id).css("border-color", "#FF9900");
                 $("#" + id + " .errormessage").css("visibility", "visible");
             }
         }
-
         if (!flag) {
             var scroll_offset = $("#" + array[m].id).offset(); //得到pos这个div层的offset，包含两个值，top和left 
             $("body,html").animate({
@@ -40,5 +39,4 @@ $(document).ready(function() {
             $(this).parents("tr").nextAll().last().css("visibility", "hidden");
         }
     });
-
 })

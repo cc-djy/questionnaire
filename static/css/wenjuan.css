@@ -11,7 +11,7 @@
     }
     
     #toptitle {
-        background-color: #1ea0fa;
+        background-color: #99CD00;
         padding: 12px 10px;
         width: 100%;
         color: #ffffff;
@@ -47,6 +47,7 @@
         height: 42px;
         text-align: center;
         padding: 10px 0px !important;
+        height: 16%;
     }
     
     .button {
@@ -135,6 +136,8 @@
         border-style: solid;
         border-color: #F7F7F7;
         border-width: 2px;
+        table-layout: fixed;
+        word-break: break-all;
     }
     
     #part2 table {
