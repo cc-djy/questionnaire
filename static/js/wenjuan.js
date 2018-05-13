@@ -31,13 +31,9 @@ $(document).ready(function() {
             });
         }
         if (flag) {
-            check();
+            $("#from1").submit();
         }
     });
-
-    function check() {
-        return true;
-    }
 
     $(":radio").click(function() {
         var flag = $(this).parents("table").css("border");
