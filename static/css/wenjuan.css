@@ -166,3 +166,11 @@
         color: #fff;
         font-size: 14px;
     }
+    
+    .textDec {
+        font-size: 90%;
+    }
+    
+    #divResult {
+        visibility: hidden;
+    }
