@@ -46,7 +46,7 @@
                                     <div class="radio">
                                         <input type="radio" name="option{{ question.question_id }}"
                                                id="option{{ question.question_id }}_{{option.option_num_id}}"
-                                               value="{{option.option_id}}">
+                                               value="{{option.option_id}}" checked>
                                         <label for="option{{ question.question_id }}_{{option.option_num_id}}">
                                             {{ option.option_id }}.{{ option.option_description }}
                                         </label>
@@ -81,7 +81,7 @@
                                     <div class="radio">
                                         <input type="radio" name="option{{ question.question_id }}"
                                                id="radio{{ question.question_id }}_{{option.option_num_id}}"
-                                               value="{{option.option_id}}">
+                                               value="{{option.option_id}}" checked>
                                         <label for="radio{{ question.question_id }}_{{option.option_num_id}}">
                                             {{ option.option_id }}.{{ option.option_description }}
                                         </label>
