@@ -84,7 +84,21 @@ def index(request):
 
 
 def result(request):
-    '''计算结果的视图'''
+    '''
+        计算结果的视图
+        模板页面的表单为：
+        {
+            "option1":"A"，
+            "option2":"B",
+            ,,,,
+        }
+
+        交给模板页面的字典为：
+        {
+            "name":"",
+            "description":"",
+        }
+    '''
 
     # 定义所有的性格及其加分题目
     Extroversion = {
@@ -224,14 +238,17 @@ def result(request):
         # 将分数装好，传给模板页面
         context['score'].append(position["score"])
 
+    print(context['score'])
+
     # 计算，你属于哪一种人格
     character = ""
     for i in range(0, 8, 2):
-        if context['score'][i] > context['score'][i] + 1:
+        if context['score'][i] < context['score'][i + 1]:
             character += positions[i]['name']
         else:
             character += positions[i + 1]['name']
 
     context['result'] = result[character]
+    print(character)
 
     return render(request, 'result.html', context)
