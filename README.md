@@ -1,5 +1,5 @@
 # questionnaire
-问卷系统(2018.5.11更新)
+问卷系统(2018.5.13更新)
 
 # 关于:如何运行从git下载来的项目
 
@@ -77,68 +77,66 @@ import sqlite3
 import re
 import codecs
 
-filepath = r"C:\Users\Orh\Desktop\demo.html"
+filepath = r'question.txt'
 re_str_1 = r"^(\d{1,2})\s*、\s*([^\r]+?？)[\r\n]+A\s*[\.．]\s*([^\r]+)[\r\n]+B\s*[\.．]\s*([^\r]+)[\r\n]+"
 re_str_2 = r"(\d{1,2})\s*、\s*A\s*[\.．]\s*([^\s]+)\s+B\s*[\.．]\s*([^\r]+)[\r\n]+"
 
-with codecs.open(filepath, "r", encoding="utf-8") as fr:
-  raw_str = fr.read()
+with codecs.open(filepath, 'r', encoding='utf-8') as fr:
+    raw_str = fr.read()
 
-  read_str_1_3 = raw_str.replace("\xa0", "_")
-  one_three = re.compile(re_str_1, re.M | re.I)
-  find_list_1_3 = one_three.findall(read_str_1_3)
+read_str_1_3 = raw_str.replace("\xa0", "_")
+one_three = re.compile(re_str_1, re.M | re.I)
+find_list_1_3 = one_three.findall(read_str_1_3)
 
-  print(len(find_list_1_3))
-  print(find_list_1_3)
+print(len(find_list_1_3))
+print(find_list_1_3)
 
-  read_str_2 = raw_str
-  two = re.compile(re_str_2, re.M | re.I)
-  find_list_2 = two.findall(read_str_2)
+read_str_2 = raw_str
+two = re.compile(re_str_2, re.M | re.I)
+find_list_2 = two.findall(read_str_2)
 
-  print(len(find_list_2))
-  print(find_list_2)
+print(len(find_list_2))
+print(find_list_2)
 
-conn = sqlite3.connect('test.sqlite3')
+
+conn = sqlite3.connect('../db.sqlite3')
 cursor = conn.cursor()
 
-cursor.execute("INSERT INTO TestPaper (PaperName) VALUES ('问卷一')")
-cursor.execute("INSERT INTO Subject_Type (Description,PaperID) VALUES ('哪一答案最接近地描述了你通常的思考和行为方式。',1)")
-cursor.execute(
-  "INSERT INTO Subject_Type (Description,PaperID) VALUES ('在以下各对词中，你更倾向于哪一个。考虑以下这些词的意思，而不是它们好不好听或好不好看。',1)")
-cursor.execute("INSERT INTO Subject_Type (Description,PaperID) VALUES ('哪个答案最接近地描述了你通常的思考和行为方式。',1)")
+cursor.execute("INSERT INTO test_paper (paper_name) VALUES ('问卷一')")
+cursor.execute("INSERT INTO question_type (description,paper_id) VALUES ('哪一答案最接近地描述了你通常的思考和行为方式。',1)")
+cursor.execute("INSERT INTO question_type (description,paper_id) VALUES ('在以下各对词中，你更倾向于哪一个。考虑以下这些词的意思，而不是它们好不好听或好不好看。',1)")
+cursor.execute("INSERT INTO question_type (description,paper_id) VALUES ('哪个答案最接近地描述了你通常的思考和行为方式。',1)")
 
 i = 1
 
 for item in find_list_1_3[:26]:
-  Question_Description = item[1]
-  Option_Descriptions = item[2:]
-  cursor.execute(
-    "INSERT INTO Question (Question_Description,Subject_TypeId) VALUES ('%s',%d)" % (
-      Question_Description, 1))
+    question_description = item[1]
+    option_descriptions = item[2:]
+    cursor.execute("INSERT INTO question (question_description,question_type_id) VALUES ('%s',%d)" % (question_description, 1))
 
-  for it in Option_Descriptions:
-    cursor.execute("INSERT INTO Option (Option_Description,QuestionId) VALUES ('%s',%d)" % (it, i))
-  i += 1
+    for it in option_descriptions:
+        cursor.execute("INSERT INTO option (option_description,question_id) VALUES ('%s',%d)" % (it, i))
+    i += 1
 
 for item in find_list_2:
-  Question_Description = ""
-  Option_Descriptions = item[1:]
-  cursor.execute(
-    "INSERT INTO Question (Question_Description,Subject_TypeId) VALUES ('%s',%d)" % (
-      Question_Description, 2))
-  for it in Option_Descriptions:
-    cursor.execute("INSERT INTO Option (Option_Description,QuestionId) VALUES ('%s',%d)" % (it, i))
-  i += 1
+    question_description = ""
+    option_descriptions = item[1:]
+    cursor.execute(
+    "INSERT INTO question (question_description,question_type_id) VALUES ('%s',%d)" % (
+    question_description, 2))
+
+    for it in option_descriptions:
+        cursor.execute("INSERT INTO option (option_description,question_id) VALUES ('%s',%d)" % (it, i))
+    i += 1
 
 for item in find_list_1_3[26:]:
-  Question_Description = item[1]
-  Option_Descriptions = item[2:]
-  cursor.execute(
-    "INSERT INTO Question (Question_Description,Subject_TypeId) VALUES ('%s',%d)" % (
-      Question_Description, 3))
-  for it in Option_Descriptions:
-    cursor.execute("INSERT INTO Option (Option_Description,QuestionId) VALUES ('%s',%d)" % (it, i))
-  i += 1
+    question_description = item[1]
+    option_descriptions = item[2:]
+    cursor.execute("INSERT INTO question (question_description,question_type_id) VALUES ('%s',%d)" % (question_description, 3))
+
+    for it in option_descriptions:
+        cursor.execute("INSERT INTO option (option_description,question_id) VALUES ('%s',%d)" % (it, i))
+    i += 1
 
 cursor.close()
 conn.commit()
@@ -172,50 +170,55 @@ conn.close()
 },{},{},...
 ```
 
-```python
-PaperName = TestPaper.objects.filter(PaperID=1)
-Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
-title_id = 1
-ques_id = 1
-all_ques = []
-for item in Subject_TypeId:
-  Dict_1 = {'description': item.Description, "content": []}
-  QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
-  for items in QuestionId:
-    Dict_2 = {'Title': items.Question_Description, 'option': []}
-    OptionID = Option.objects.filter(QuestionId=items.QuestionId)
-    option_id = 1
-    for itemss in OptionID:
-      Dict_2['option'].append((option_id, itemss.OptionID, itemss.Option_Description))
-      option_id += 1
-    Dict_1["content"].append((ques_id, items.QuestionId, Dict_2))
-    ques_id += 1
-  all_ques.append((title_id, Dict_1))
-  title_id += 1
-print(all_ques)
 
 # 前端循环打印的列表，附带题号索引以及选项索引
 
-PaperName = TestPaper.objects.filter(PaperID=1)
-Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
-title_id = 1
-ques_id = 1
-all_ques = []
-for item in Subject_TypeId:
-  Dict_1 = {'list_id': title_id, 'description': item.Description, "content": []}
-  QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
-  for items in QuestionId:
-    Dict_2 = {'list_id': ques_id, 'Title': items.Question_Description, 'option': []}
-    OptionID = Option.objects.filter(QuestionId=items.QuestionId)
-    option_id = 1
-    for itemss in OptionID:
-      Dict_2['option'].append((chr(64 + option_id), itemss.Option_Description))
-      option_id += 1
-    Dict_1["content"].append(Dict_2)
-    ques_id += 1
-  all_ques.append(Dict_1)
-  title_id += 1
-print(all_ques)
+```python
+    context = {}  # 页面内容上下文
+
+    test_paper = TestPaper.objects.filter(paper_id=1)  # 读取问卷
+    context['paper_name'] = test_paper[0].paper_name
+
+    question_types = QuestionType.objects.filter(paper_id=test_paper[0].paper_id)  # 读取问题类型
+    context['question_types'] = []
+
+    question_id = 1
+
+    # 循环读取问题类型
+    for question_type in question_types:
+        # 问题类型字典
+        question_type_dict = {
+            'description': question_type.description,
+            "questions": []
+        }
+
+        questions = Question.objects.filter(question_type_id=question_type.question_type_id)  # 读取问题
+
+        # 循环读取问题
+        for question in questions:
+            # 问题字典
+            question_dict = {
+                'question_id': question_id,
+                'title': question.question_description,
+                'options': []
+            }
+
+            options = Option.objects.filter(question_id=question.question_id)  # 读取选项
+            option_id = 1
+
+            # 循环读取选项
+            for option in options:
+                option.option_id = (chr(64 + option_id))
+                question_dict['options'].append(option) # 将选项放进问题字典
+                option_id += 1
+
+            # 将问题方法进问题字典
+            question_type_dict['questions'].append(question_dict)
+            question_id += 1
+
+
+        # 将问题类型字典放进context
+        context['question_types'].append(question_type_dict)
 ```
 
 ## 前端提交给服务器的json封装格式 [仅供参考]
@@ -236,7 +239,7 @@ Subject_TypeId = Subject_Type.objects.filter(PaperID=1)
 ques_id = 1
 all_ques = {}
 for item in Subject_TypeId:
-  Dict_1 = {}
+    Dict_1 = {}
   QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
   for items in QuestionId:
     Dict_2 = {ques_id: (items.QuestionId, {})}
@@ -251,7 +254,21 @@ for item in Subject_TypeId:
 ```
 
 ## 评价规则 [仅供参考]
-{"题目索引_1"：{"选项id_1":[],"选项id_2":[],...},...}
+模板页面的表单为：
+```json
+{
+  "option1":"A"，
+  "option2":"B",
+  ,,,,
+}
+```
+交给模板页面的字典为：
+```json
+{
+  "name":"",
+  "description":"",
+}
+```
 
 ```python
 Extroversion = {"A": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83), "B": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91)} # E
@@ -313,3 +330,7 @@ https://www.jetbrains.com/pycharm/features/editions_comparison_matrix.html
 pycharm社区版 django项目构建
 https://my.oschina.net/hevakelcj/blog/384070
 
+# 前端可能要做的东西
+1. 往上的功能
+2. 进度条
+2. 等待加载的一个圈圈

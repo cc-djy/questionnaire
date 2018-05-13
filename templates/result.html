@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../static/css/wenjuan.css" type="text/css">
+    <script src="../static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/js/result.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+<div id="toptitle">
+    <h1 class="htitle">大学生心理调查分析</h1>
+</div>
+<div id="divDesc" class="formfield">
+    <p class="textDec" style="text-align:center;margin-top: 15px">您的答卷已经提交，感谢您的参与！</p>
+</div>
+<div class="container">
+    <div class="panel panel-default" id="divResult">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                您的问卷测验结果分析如下:
+            </h3>
+        </div>
+        <div class="panel-body">
+
+            <h1></h1>
+
+            <h3>{{ result.name }}</h3>
+            <hr>
+            {{ result.description }}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
