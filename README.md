@@ -330,3 +330,7 @@ https://www.jetbrains.com/pycharm/features/editions_comparison_matrix.html
 pycharm社区版 django项目构建
 https://my.oschina.net/hevakelcj/blog/384070
 
+# 前端可能要做的东西
+1. 往上的功能
+2. 进度条
+2. 等待加载的一个圈圈
