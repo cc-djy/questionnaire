@@ -240,17 +240,17 @@ ques_id = 1
 all_ques = {}
 for item in Subject_TypeId:
     Dict_1 = {}
-  QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
-  for items in QuestionId:
-    Dict_2 = {ques_id: (items.QuestionId, {})}
-    OptionID = Option.objects.filter(QuestionId=items.QuestionId)
-    option_id = 1
-    for itemss in OptionID:
-      Dict_2[ques_id][1].update({option_id: (itemss.OptionID,[])})
-      option_id += 1
-    Dict_1.update(Dict_2)
-    ques_id += 1
-  all_ques.update(Dict_1)
+    QuestionId = Question.objects.filter(Subject_TypeId=item.Subject_TypeId)
+    for items in QuestionId:
+        Dict_2 = {ques_id: (items.QuestionId, {})}
+        OptionID = Option.objects.filter(QuestionId=items.QuestionId)
+        option_id = 1
+        for itemss in OptionID:
+            Dict_2[ques_id][1].update({option_id: (itemss.OptionID,[])})
+            option_id += 1
+            Dict_1.update(Dict_2)
+            ques_id += 1
+    all_ques.update(Dict_1)
 ```
 
 ## 评价规则 [仅供参考]
@@ -271,55 +271,74 @@ for item in Subject_TypeId:
 ```
 
 ```python
-Extroversion = {"A": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83), "B": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91)} # E
-Introversion = {"A": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91), "B": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83)} # I
-Sensing = {"A": (2, 9, 25, 30, 34, 39, 50, 52, 54, 60, 63, 73, 92),
-      "B": (5, 11, 18, 22, 27, 44, 46, 48, 65, 67, 69, 71, 82)} # S
-Intuition = {"A": (5, 11, 18, 22, 27, 44, 46, 48, 65, 67, 69, 71, 82),
-       "B": (2, 9, 25, 30, 34, 39, 50, 52, 54, 60, 63, 73, 92)
-       } # N
-Thinking = {"A": (31, 33, 35, 43, 45, 47, 49, 56, 58, 61, 66, 75, 87),
-      "B": (6, 15, 21, 29, 37, 40, 51, 53, 70, 72, 89)} # T
+    # 定义所有的性格及其加分题目
+Extroversion = {
+    "A": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83),
+    "B": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91),
+}  # E
+Introversion = {
+    "A": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91),
+    "B": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83),
+}  # I
+Sensing = {
+    "A": (2, 9, 25, 30, 34, 39, 50, 52, 54, 60, 63, 73, 92),
+    "B": (5, 11, 18, 22, 27, 44, 46, 48, 65, 67, 69, 71, 82),
+}  # S
+Intuition = {
+    "A": (5, 11, 18, 22, 27, 44, 46, 48, 65, 67, 69, 71, 82),
+    "B": (2, 9, 25, 30, 34, 39, 50, 52, 54, 60, 63, 73, 92),
+}  # N
+Thinking = {
+    "A": (31, 33, 35, 43, 45, 47, 49, 56, 58, 61, 66, 75, 87),
+    "B": (6, 15, 21, 29, 37, 40, 51, 53, 70, 72, 89),
+}  # T
 Feeling = {
-  "A": (6, 15, 21, 29, 37, 40, 51, 53, 70, 72, 89), "B": (31, 33, 35, 43, 45, 47, 49, 56, 58, 61, 66, 75, 87)} # F
-Judge = {"A": (1, 4, 12, 14, 20, 28, 36, 41, 64, 76, 86),
-     "B": (8, 17, 24, 55, 59, 78, 80, 84, 88, 90, 93)} # J
+    "A": (6, 15, 21, 29, 37, 40, 51, 53, 70, 72, 89),
+    "B": (31, 33, 35, 43, 45, 47, 49, 56, 58, 61, 66, 75, 87),
+}  # F
+Judge = {
+    "A": (1, 4, 12, 14, 20, 28, 36, 41, 64, 76, 86),
+    "B": (8, 17, 24, 55, 59, 78, 80, 84, 88, 90, 93),
+}  # J
 Perceive = {
-  "A": (8, 17, 24, 55, 59, 78, 80, 84, 88, 90, 93), "B": (1, 4, 12, 14, 20, 28, 36, 41, 64, 76, 86)} # P
+    "A": (8, 17, 24, 55, 59, 78, 80, 84, 88, 90, 93),
+    "B": (1, 4, 12, 14, 20, 28, 36, 41, 64, 76, 86),
+}  # P
+
 sum = 0
 for item in [Extroversion, Introversion, Sensing, Intuition, Thinking, Feeling, Judge, Perceive][::2]: # [1::2]
-  # print(item)
-  sum += len(item['A']) + len(item['B'])
-  print(len(item['A']) + len(item['B']))
-  # print(sum)
+    # print(item)
+    sum += len(item['A']) + len(item['B'])
+    print(len(item['A']) + len(item['B']))
+    # print(sum)
 
 ques_ans = {}
 init_list = [0, 0, 0, 0, 0, 0, 0, 0]
 position = [Extroversion, Introversion, Sensing, Intuition, Thinking, Feeling, Judge, Perceive]
 for i in range(1, sum + 1):
-  init_group = []
-  position_num_record = []
-  for x in range(len(position[0])):
-    init_group.append(init_list.copy())
-    position_num_record.append([])
+    init_group = []
+    position_num_record = []
+    for x in range(len(position[0])):
+        init_group.append(init_list.copy())
+        position_num_record.append([])
 
-  y = 0
-  for item in position:
-    t = 0
-    for x in item:
-      if i in item[x]:
-        position_num_record[t].append(y)
-      t += 1
-    y += 1
+    y = 0
+    for item in position:
+        t = 0
+        for x in item:
+            if i in item[x]:
+                position_num_record[t].append(y)
+                t += 1
+            y += 1
 
-  ques_ans.update({i: {}})
+ques_ans.update({i: {}})
 
-  y = 0
-  for item in init_group:
-    for x in position_num_record[y]:
-      item[x] = 1
-    ques_ans[i].update({y + 1: item})
-    y += 1
+y = 0
+for item in init_group:
+    for x in position_num_record[y]:
+        item[x] = 1
+        ques_ans[i].update({y + 1: item})
+        y += 1
 
 print(ques_ans)
 ```

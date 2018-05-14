@@ -6,7 +6,7 @@ from .global_var import result_type, getter as get_var, setter as set_var
 from .Tools import get_json, clac_score, get_result
 
 
-# @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
+@cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性
 def index(request):
     """
         关于index页面的视图,以及交给模板的字典格式如下:
@@ -56,10 +56,12 @@ def index(request):
 
         # 循环读取问题
         for question in questions:
+            question_description = question.question_description.replace(" ", "_")
+
             # 问题字典
             question_dict = {
                 'question_id': question_id,
-                'title': question.question_description,
+                'title': question_description,
                 'options': []
             }
 
