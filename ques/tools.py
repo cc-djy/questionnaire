@@ -1,4 +1,5 @@
 def get_remark_rule():
+    '''生成题目选项所对应的分数的索引'''
     Extroversion = {
         "A": (3, 7, 10, 19, 23, 32, 62, 74, 79, 81, 83),
         "B": (13, 16, 26, 38, 42, 57, 68, 77, 85, 91),
@@ -71,19 +72,19 @@ def get_remark_rule():
 
 
 def get_json():
+    """
+        {"题目索引_1":
+            (
+                "题目id_1",{
+                "选项索引_1":("选项id_1",[]),
+                "选项索引_2":("选项id_2",[]),
+                ...
+                }
+            ),"":(),"":(),...
+        }
+        :return: dict
+    """
     from .models import TestPaper, QuestionType, Question, Option
-    """
-    {"题目索引_1":
-        (
-            "题目id_1",{
-            "选项索引_1":("选项id_1",[]),
-            "选项索引_2":("选项id_2",[]),
-            ...
-            }
-        ),"":(),"":(),...
-    }
-    :return: dict
-    """
     # PaperName = TestPaper.objects.filter(paper_id=1)
     Subjects = QuestionType.objects.filter(paper_id=1)
     ques_id = 1
@@ -136,6 +137,11 @@ def clac_score(arg_list):
 
 
 def get_result(all_score):
+    '''
+    得出最后性格的函数
+    :param all_score:
+    :return:
+    '''
 
     character = []
 
