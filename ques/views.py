@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from .models import TestPaper, QuestionType, Question, Option
 from .global_var import result_type, getter as get_var, setter as set_var
-from .Tools import get_json, clac_score, get_result
+from .tools import get_json, clac_score, get_result
 
 
 @cache_page(60 * 15)  # 秒数，这里指缓存 15 分钟，不直接写900是为了提高可读性

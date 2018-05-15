@@ -1,5 +1,5 @@
 # questionnaire
-问卷系统(2018.5.13更新)
+性格测试系统(2018.5.15更新)
 
 # 关于:如何运行从git下载来的项目
 
@@ -20,9 +20,10 @@
 
 5. 读题目,运行 test_paper 文件夹中的 test.py 文件(注意linux与win的换行区别,此处的正则式要用win的换行)
 
-6. 命令端口运行项目
+6. 命令端口运行项目 [Why does DEBUG=False setting make my django Static Files Access fail?
+](https://stackoverflow.com/questions/5836674/why-does-debug-false-setting-make-my-django-static-files-access-fail)
     ```bash
-    python manage.py runserver [port]
+    python manage.py --insecure  runserver [port]
     ```
     
 # 关于:如何在命令行模式下，使用git命令clone和push项目到dev分支
