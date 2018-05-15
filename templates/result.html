@@ -7,23 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/wenjuan.css" type="text/css">
-    <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/js/result.js"></script>
+
     <title>测评结果</title>
 </head>
 
 <body>
 
-<div id="toptitle">
-    <h1 class="htitle">大学生心理调查分析</h1>
-</div>
-<div id="divDesc" class="formfield">
-    <p class="textDec" style="text-align:center;margin-top: 15px">您的答卷已经提交，感谢您的参与！</p>
-</div>
-<div class="container">
-    <div id="bonfire-pageloader">
-        <div class="bonfire-pageloader-icon">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+    <div id="toptitle">
+        <h1 class="htitle">大学生心理调查分析</h1>
+    </div>
+    <div id="divDesc" class="formfield">
+        <p class="textDec" style="text-align:center;margin-top: 15px">您的答卷已经提交，感谢您的参与！</p>
+    </div>
+    <div class="container">
+        <div id="bonfire-pageloader">
+            <div class="bonfire-pageloader-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
                         <path id="loading-12-icon" d="M291,82.219c0,16.568-13.432,30-30,30s-30-13.432-30-30s13.432-30,30-30S291,65.65,291,82.219z
                  M261,404.781c-15.188,0-27.5,12.312-27.5,27.5s12.312,27.5,27.5,27.5s27.5-12.312,27.5-27.5S276.188,404.781,261,404.781z
                  M361.504,113.167c-4.142,7.173-13.314,9.631-20.487,5.489c-7.173-4.141-9.631-13.313-5.49-20.487
@@ -44,24 +43,25 @@
                  M188.482,131.649c14.352-8.286,19.266-26.633,10.982-40.982c-8.285-14.348-26.631-19.264-40.982-10.98
                 c-14.346,8.285-19.264,26.633-10.98,40.982C155.787,135.017,174.137,139.932,188.482,131.649z" />
                     </svg>
+            </div>
+        </div>
+        <div class="panel panel-default" id="divResult">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    您的问卷测验结果分析如下:
+                </h3>
+            </div>
+            <div class="panel-body">
+
+                <h1></h1>
+
+                <h3>{{ name }}</h3>
+                <hr> {{ description }}
+            </div>
         </div>
     </div>
-    <div class="panel panel-default" id="divResult">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                您的问卷测验结果分析如下:
-            </h3>
-        </div>
-        <div class="panel-body">
-
-            <h1></h1>
-
-            <h3>{{ name }}</h3>
-            <hr>
-            {{ description }}
-        </div>
-    </div>
-</div>
+    <script src="/static/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/js/result.js"></script>
 </body>
 
 </html>
