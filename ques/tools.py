@@ -1,3 +1,61 @@
+
+
+
+def get_questions():
+    from .models import TestPaper, Question, QuestionType, Option
+    context = {}  # 页面内容上下文
+
+    test_paper = TestPaper.objects.filter(paper_id=1)  # 读取问卷
+    context['paper_name'] = test_paper[0].paper_name
+
+    question_types = QuestionType.objects.filter(paper_id=test_paper[0].paper_id)  # 读取问题类型
+    context['question_types'] = []
+
+    question_id = 1
+
+    # 循环读取问题类型
+    for question_type in question_types:
+        # 问题类型字典
+        question_type_dict = {
+            'question_type_id': question_type.question_type_id,
+            'description': question_type.description,
+            "questions": []
+        }
+
+        questions = Question.objects.filter(question_type_id=question_type.question_type_id)  # 读取问题
+
+        # 循环读取问题
+        for question in questions:
+            question_description = question.question_description.replace(" ", "_")
+
+            # 问题字典
+            question_dict = {
+                'question_id': question_id,
+                'title': question_description,
+                'options': []
+            }
+
+            options = Option.objects.filter(question_id=question.question_id)  # 读取选项
+
+            option_id = 1
+            # 循环读取选项
+            for option in options:
+                question_dict['options'].append({
+                    'option_id': chr(64 + option_id),
+                    'option_num_id': option_id,
+                    'option_description': option.option_description
+                })  # 将选项放进问题字典
+                option_id += 1
+
+            # 将问题方法进问题字典
+            question_type_dict['questions'].append(question_dict)
+            question_id += 1
+
+        # 将问题类型字典放进context
+        context['question_types'].append(question_type_dict)
+
+    return context
+
 def get_remark_rule():
     '''生成题目选项所对应的分数的索引'''
     Extroversion = {
