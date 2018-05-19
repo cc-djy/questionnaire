@@ -1,6 +1,18 @@
 from typing import Dict, Any, Union
 
 
+class GQues:
+    ques = None
+
+
+def getter_ques():
+    return GQues.ques
+
+
+def setter_ques(arg):
+    GQues.ques = arg
+
+
 class GVar:
     var = None
 
