@@ -117,7 +117,12 @@ STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'all_static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
+
 # STATICFILES_FINDERS = (
 #     "django.contrib.staticfiles.finders.FileSystemFinder",
 #     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 # )
+
+# default login url is: '/accounts/login/'
+# if you want to change it then go to settings.py
+LOGIN_URL='/login/'

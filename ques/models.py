@@ -1,7 +1,9 @@
+from django.contrib import admin
 from django.db import models
 
-
 # Create your models here.
+
+
 
 class TestPaper(models.Model):
     """
@@ -92,3 +94,10 @@ class SelectRecord(models.Model):
 
     def __str__(self):
         return 'select_record {}'.format(self.commit_id)
+
+
+class SelectRecordAdmin(admin.ModelAdmin):
+    list_display = ("commit_id", "question_id", "option_id")
+
+class CommitRecordAdmin(admin.ModelAdmin):
+    list_display = ("commit_id", "user_openid", "user_id")
