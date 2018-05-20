@@ -1,25 +1,17 @@
 import json
+import random
 import urllib.request, urllib.parse, urllib.error
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.utils import timezone
+
 from .global_var import result_type, getter as get_var, setter as set_var, getter_ques as get_ques, \
     setter_ques as set_ques
-from .tools import get_json, clac_score, get_result, get_questions
+from .tools import get_json, clac_score, get_result, get_questions, get_client_ip
 
 
-def get_client_ip(request):
-    '''获取用户ip'''
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
-
-def index(request):
-    '''关于index页面的视图'''
-
+def login(request):
     data = {
         "appid": "wjxt",  # 设置应用系统的AppID，每个应用都不同，你要先去申请注册
         "appsecret": "57a97405ac28",  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
@@ -51,8 +43,17 @@ def index(request):
             request.session['group'] = user_info['group']
             request.session['openid'] = user_info['openid']
         else:
-            return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
-            # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
+            return False
+    return True
+
+
+def index(request):
+    '''关于index页面的视图'''
+
+    # 上线时，这里要解封
+    # if login(request) is False:
+    #     return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
+    # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
 
     # return HttpResponse(
     #     "Login success!\n your IP Address : {} {}".format(get_client_ip(request), request.session.get('username')))
@@ -68,17 +69,36 @@ def index(request):
 
 def result(request):
     """计算结果的视图"""
+    from .models import CommitRecord, SelectRecord
     if request.method != "POST":
         return None
+
+    commit_record = CommitRecord(
+        user_openid='a28c64d4b9cf'+str(random.randint(1000000,9999999))+'504b9584510',
+        user_id="2013"+str(random.randint(1000000,9999999)),
+        client_time=timezone.now(),
+        server_time=timezone.now(),
+    )
+    commit_record.save()
+    print(commit_record.commit_id)
 
     remark_list = []
     if get_var() is None:
         set_var(get_json())
     remark_dict = get_var()
 
+    select_record_list = []
     for i in range(1, 93 + 1):
         select = ord(request.POST["option{}".format(i)]) - 64
         remark_list.append(remark_dict[i][1][select][1])
+        select_record = SelectRecord(
+            commit_id=commit_record.commit_id,
+            question_id=remark_dict[i][0],
+            option_id=remark_dict[i][1][select][0],
+        )
+        select_record_list.append(select_record)
+
+    SelectRecord.objects.bulk_create(select_record_list)
 
     character = result_type[get_result(clac_score(remark_list))]
 

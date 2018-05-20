@@ -29,7 +29,7 @@
 # 关于:如何在命令行模式下，使用git命令clone和push项目到dev分支
 > @worksg 一下命令需要更改使用人名称和邮箱以及git项目的路径，切勿直接复制粘贴
 
-	
+```bash
 	git config --global user.email "571940753@qq.com" #配置git邮箱信息
 	git config --global user.name "worksg" #配置git维护者信息
 
@@ -42,7 +42,8 @@
 	git add <file_or_filepath>	# add
 	git commit -m "<your_comment>"	# commit
 	git push -u origin dev	# push
-	
+```
+
 # 关于学校中央认证的接入
 ![](https://upload-images.jianshu.io/upload_images/4781155-fd2da336c0b05302.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
