@@ -1,7 +1,40 @@
-
+def get_client_ip(request):
+    '''获取用户ip'''
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def get_questions():
+    """
+        交给模板的字典格式如下:
+        {
+            "paper_name":""
+            "question_types":
+            [
+                "question_type_id":int
+                "description":"",
+                "questions":
+                [
+                    {
+                    "question_id":int
+                    "title":"",
+                    "options":
+                        [
+                            {
+                                'option_id': "",
+                                'option_description': ""
+                            },{},{},...
+                        ]
+                    },{},{},...
+                ]
+            ]
+        },{},{},...
+
+    """
     from .models import TestPaper, Question, QuestionType, Option
     context = {}  # 页面内容上下文
 
