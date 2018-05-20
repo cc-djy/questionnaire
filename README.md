@@ -42,6 +42,10 @@
 	git add <file_or_filepath>	# add
 	git commit -m "<your_comment>"	# commit
 	git push -u origin dev	# push
+	
+# 关于学校中央认证的接入
+![](https://upload-images.jianshu.io/upload_images/4781155-fd2da336c0b05302.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 # 项目结构
 
