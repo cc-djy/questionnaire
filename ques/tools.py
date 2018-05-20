@@ -2,6 +2,32 @@
 
 
 def get_questions():
+    """
+        交给模板的字典格式如下:
+        {
+            "paper_name":""
+            "question_types":
+            [
+                "question_type_id":int
+                "description":"",
+                "questions":
+                [
+                    {
+                    "question_id":int
+                    "title":"",
+                    "options":
+                        [
+                            {
+                                'option_id': "",
+                                'option_description': ""
+                            },{},{},...
+                        ]
+                    },{},{},...
+                ]
+            ]
+        },{},{},...
+
+    """
     from .models import TestPaper, Question, QuestionType, Option
     context = {}  # 页面内容上下文
 
