@@ -14,7 +14,7 @@ from .tools import get_json, clac_score, get_result, get_questions, get_client_i
 def login(request):
     data = {
         "appid": "wjxt",  # 设置应用系统的AppID，每个应用都不同，你要先去申请注册
-        "appsecret": "57a97405ac28",  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
+        "appsecret": "*******",  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
         'token': request.GET.get('token'),  # 获取token
         'userip': get_client_ip(request),  # 获取用户ip
     }
