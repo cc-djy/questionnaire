@@ -7,17 +7,21 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from .global_var import result_type, getter as get_var, setter as set_var, getter_ques as get_ques, \
-    setter_ques as set_ques
+    setter_ques as set_ques, get_app_secret, get_app_id
 from .tools import get_json, clac_score, get_result, get_questions, get_client_ip
 
 def mbti(request):
     context = {}
+    # 上线时，这里要解封
+    # if login(request) is False:
+    #     return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
+        # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
     return render(request, 'mbti.html', context)
 
 def login(request):
     data = {
-        "appid": "wjxt",  # 设置应用系统的AppID，每个应用都不同，你要先去申请注册
-        "appsecret": "*******",  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
+        "appid": get_app_id(),  # 设置应用系统的AppID，每个应用都不同，你要先去申请注册
+        "appsecret": get_app_secret(),  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
         'token': request.GET.get('token'),  # 获取token
         'userip': get_client_ip(request),  # 获取用户ip
     }
@@ -52,20 +56,10 @@ def login(request):
 
 def index(request):
     '''关于index页面的视图'''
-
-    # 上线时，这里要解封
-    # if login(request) is False:
-    #     return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
-    # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
-
-    # return HttpResponse(
-    #     "Login success!\n your IP Address : {} {}".format(get_client_ip(request), request.session.get('username')))
-
     if get_ques() is None:
         set_ques(get_questions())
     context = get_ques()
 
-    # return render(request, 'index.html', context)
     response = JsonResponse(context)
     return HttpResponse(response, content_type='application/json')
 
@@ -82,6 +76,15 @@ def result(request):
         client_time=timezone.now(),
         server_time=timezone.now(),
     )
+
+    # 下面这个是
+    # commit_record = CommitRecord(
+    #     user_openid=request.session.get('wx_openid'),
+    #     user_id=request.session.get('username'),
+    #     client_time=timezone.now(),
+    #     server_time=timezone.now(),
+    # )
+
     commit_record.save()
     print(commit_record.commit_id)
 
