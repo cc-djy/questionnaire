@@ -7,7 +7,7 @@ $(document).ready(function() {
     var part2Length;
     var part3Length;
     var totalLength;
-     $.get("http://127.0.0.1:8000/",function(data,status){
+     $.get("http://127.0.0.1:8000/index/",function(data,status){
           paper = data;
           $("#title>span:last").text(data.question_types[0].description);
           part1Length = data.question_types[0].questions.length;
@@ -40,6 +40,15 @@ $(document).ready(function() {
         $("body").css("height","100%");
     })
 
+    //进度条
+    function progressGrow() {
+        var p = $(".progress-bar").parent().css("width");
+        var length = parseInt(p);
+        doIndex++;
+        length = length * (doIndex / totalLength);
+        $(".progress-bar").css("width", length + "px");
+    }
+
     //label点击函数
     function clickRadio(obj) {
          if(currentIndex>doIndex) {
@@ -48,6 +57,7 @@ $(document).ready(function() {
             parent.fadeOut(200);
             setTimeout(function(){
                 if(parent.next().length==0) {
+                    progressGrow()
                     return ;
                 }
                 parent.next().fadeIn(200);
@@ -56,12 +66,8 @@ $(document).ready(function() {
                 var id_2 = $("#"+id+" label:last").attr("for");
                 $("#"+id+" label").attr("for","");
                 setTimeout(function(){
-                    var p = $(".progress-bar").parent().css("width");
-                    var length = parseInt(p);
-                    doIndex++;
+                    progressGrow();
                     currentIndex++;
-                    length = length * (doIndex / totalLength);
-                    $(".progress-bar").css("width", length + "px");
                     if(doIndex==part1Length) {
                         $("#title>span:first").text("第二部分");
                         $("#title>span:last").text(paper.question_types[1].description);

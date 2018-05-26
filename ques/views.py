@@ -2,7 +2,7 @@ import json
 import random
 import urllib.request, urllib.parse, urllib.error
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -10,6 +10,9 @@ from .global_var import result_type, getter as get_var, setter as set_var, gette
     setter_ques as set_ques
 from .tools import get_json, clac_score, get_result, get_questions, get_client_ip
 
+def mbti(request):
+    context = {}
+    return render(request, 'mbti.html', context)
 
 def login(request):
     data = {
@@ -62,9 +65,9 @@ def index(request):
         set_ques(get_questions())
     context = get_ques()
 
-    return render(request, 'index.html', context)
-    # json_context = json.dumps(context, ensure_ascii=False)
-    # return HttpResponse(json_context)
+    # return render(request, 'index.html', context)
+    response = JsonResponse(context)
+    return HttpResponse(response, content_type='application/json')
 
 
 def result(request):

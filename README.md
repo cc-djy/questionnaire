@@ -23,7 +23,7 @@
 6. 命令端口运行项目 [Why does DEBUG=False setting make my django Static Files Access fail?
 ](https://stackoverflow.com/questions/5836674/why-does-debug-false-setting-make-my-django-static-files-access-fail)
     ```bash
-    python manage.py --insecure  runserver [port]
+    python manage.py   runserver --insecure [port]
     ```
     
 # 关于:如何在命令行模式下，使用git命令clone和push项目到dev分支
