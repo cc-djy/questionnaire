@@ -1,7 +1,7 @@
 import json
 import random
 import urllib.request, urllib.parse, urllib.error
-
+from user_agents import parse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -10,12 +10,32 @@ from .global_var import result_type, getter as get_var, setter as set_var, gette
     setter_ques as set_ques, get_app_secret, get_app_id
 from .tools import get_json, clac_score, get_result, get_questions, get_client_ip
 
+def test(request):
+    if get_ques() is None:
+        set_ques(get_questions())
+    context = get_ques()
+
+    ua_string = request.META['HTTP_USER_AGENT']
+    user_agent = parse(ua_string)
+    print(user_agent.is_mobile)
+
+    return render(request, 'index.html', context)
+
+
+    # return render(request, 'index.html', context)
 def mbti(request):
     context = {}
     # 上线时，这里要解封
-    # if login(request) is False:
-    #     return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
-        # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
+    if login(request) is False:
+        ua_string = request.META['HTTP_USER_AGENT']
+        user_agent = parse(ua_string)
+
+        if user_agent.is_mobile:
+            return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
+        else:
+            return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
+
+
     return render(request, 'mbti.html', context)
 
 def login(request):
@@ -59,6 +79,8 @@ def index(request):
     if get_ques() is None:
         set_ques(get_questions())
     context = get_ques()
+    
+    # return render(request, 'index.html', context)
 
     response = JsonResponse(context)
     return HttpResponse(response, content_type='application/json')
@@ -69,21 +91,20 @@ def result(request):
     from .models import CommitRecord, SelectRecord
     if request.method != "POST":
         return None
-
-    commit_record = CommitRecord(
-        user_openid='a28c64d4b9cf'+str(random.randint(1000000,9999999))+'504b9584510',
-        user_id="2013"+str(random.randint(1000000,9999999)),
-        client_time=timezone.now(),
-        server_time=timezone.now(),
-    )
-
-    # 下面这个是
-    # commit_record = CommitRecord(
-    #     user_openid=request.session.get('wx_openid'),
-    #     user_id=request.session.get('username'),
-    #     client_time=timezone.now(),
-    #     server_time=timezone.now(),
-    # )
+    try:
+        commit_record = CommitRecord(
+            user_openid='a28c64d4b9cf'+str(random.randint(1000000,9999999))+'504b9584510',
+            user_id="2013"+str(random.randint(1000000,9999999)),
+            client_time=timezone.now(),
+            server_time=timezone.now(),
+        )
+    except Exception as e:
+        commit_record = CommitRecord(
+            user_openid=request.session.get('wx_openid'),
+            user_id=request.session.get('username'),
+            client_time=timezone.now(),
+            server_time=timezone.now(),
+        )
 
     commit_record.save()
     print(commit_record.commit_id)
