@@ -78,7 +78,7 @@ class CommitRecord(models.Model):
         db_table = "commit_record"
 
     def __str__(self):
-        return self.commit_id
+        return 'commit_record {}'.format(self.commit_id)
 
 
 class SelectRecord(models.Model):
