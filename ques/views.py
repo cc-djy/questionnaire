@@ -16,7 +16,6 @@ def mbti(request):
     # if login(request) is False:
     #     return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
         # return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
-
     return render(request, 'mbti.html', context)
 
 def login(request):
