@@ -13,6 +13,7 @@ from .tools import get_json, clac_score, get_result, get_questions, get_client_i
 def test(request):
     if get_ques() is None:
         set_ques(get_questions())
+        print("hello")
     context = get_ques()
 
     ua_string = request.META['HTTP_USER_AGENT']
@@ -93,15 +94,15 @@ def result(request):
         return None
     try:
         commit_record = CommitRecord(
-            user_openid='a28c64d4b9cf'+str(random.randint(1000000,9999999))+'504b9584510',
-            user_id="2013"+str(random.randint(1000000,9999999)),
+            user_openid=request.session.get('wx_openid'),
+            user_id=request.session.get('username'),
             client_time=timezone.now(),
             server_time=timezone.now(),
         )
     except Exception as e:
         commit_record = CommitRecord(
-            user_openid=request.session.get('wx_openid'),
-            user_id=request.session.get('username'),
+            user_openid='a28c64d4b9cf' + str(random.randint(1000000, 9999999)) + '504b9584510',
+            user_id="2013" + str(random.randint(1000000, 9999999)),
             client_time=timezone.now(),
             server_time=timezone.now(),
         )
