@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title></title>
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container center-block" style="width:400px">
+        <div id="title" class="panel panel-default">
+            <h4>下面这一问卷用于揭示你是如何看待事物以及如何做决定的，答案无好坏之分，问卷结果有助于你了解自己的职业倾向、个性特征、人际相处的特征。请仔细阅读每一个问题，答案直接写在题目上面。不必对问题想的太多，根据第一感觉回答即可。</h4>
+        </div>
+        <div id="part1" class="panel panel-default">
+            <div id="description1" class="panel-heading">
+                <h4>第一部分</h4>
+                <hr>
+                <h4>哪一答案最接近地描述了你通常的思考和行为方式</h4>
+            </div>
+            <div id="exercise1" class="panel-body">
+                <!-- (dl#number1$>dt+(dd>label>input[type="radio" name="optionsRadios" value="$"])*2)*3 -->
+                <dl id="number1">
+                    <dt>1、当你某日想去某个地方，你会      ？</dt>
+                    <dd><label><input type="radio" name="optionsRadios1" value="1">A.计划好将做的事情以及何时做</label></dd>
+                    <dd><label><input type="radio" name="optionsRadios1" value="2">B.什么都不想就去</label></dd>
+                </dl>
+                <dl id="number2">
+                    <dt>2、如果你是一位老师，你愿教      ？</dt>
+                    <dd><label><input type="radio" name="optionsRadios2" value="1">A．涉及事实的课程</label></dd>
+                    <dd><label><input type="radio" name="optionsRadios2" value="2">B．涉及理论的课程</label></dd>
+                </dl>
+                <!-- (div#part$>(div#description$>h4)+div#exercise$>(dl#number$$>dt+(dd>label>input[type="radio",name="",value="$"])*3)*3)*3
+        <!-- ((div#ques-$>p+div.radio*2>label>input[type="radio" name="optionsRadios" value="option$"])+hr)*26 -->
+                <div id="numok"><button class="btn btn-default" type="button">交卷</button></div>
+            </div>
+            <!-- Include all compiled plugins (below), or include individual files as needed -->
+            <script src="../static/js/bootstrap.min.js"></script>
+            <script src="../static/js/jquery.min.js"></script>
+            <script type="text/javascript">
+                //页面从服务器加载json数据
+                $(document).ready(function() {
+                    alert(123)
+                    var array = new Array()
+                    $.getJSON("url", function(data, status) {
+                        array = JSON.parse(data)
+                            //把接受到的数据数组放入页面中
+                        for (var i = 0; i < array.length; i++) {
+                            var obj = array[i]
+                            $("#part" + i + 1 + "> #description1" + i + 1 + "> h4") = obj.description
+                            for (var j = 0; j < obj.content.length; j++) {
+                                $("#part" + i + 1 + "> #exercise" + i + 1 + ">dt").text(obj.content[j].title) //存放title
+                                $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:first").text(obj.content[j].option) //存放选项1
+                                $("#part" + i + 1 + "> #exercise" + i + 1 + ">dd:last").text(obj.content[j].option) //存放选项2
+                            }
+                        }
+                    })
+                })
+
+                //交卷
+                //遍历第一部分题目的每一个选项的选择
+                //这个一个JavaScript对象构造器，key-value对   形式{index:"",value=""}  分别代表题目，和用户选择的答案序号
+                function answer(index, value) {
+                    this.index = index;
+                    this.value = value;
+                }
+                var i = 0 //用来表明题目序号，下面each是顺序遍历的
+                $("button").click(function() {
+                    var results = new Array() //生成一个数组，存放所有题目的key-value对。
+                    $("#part1").children().each(function() {
+                            obj = new answer(++i, $(this).find("input:checked").val())
+                            results.push(obj) //把生成的某一道题目的答案放入数组中。
+                        })
+                        //使用ajax提交我们的results数组，转化为json格式的
+                    $.ajax({
+                        url: "",
+                        data: JSON.stringify(results),
+                        success: function(result) {
+                            alert("提交成功")
+                        }
+                    })
+                });
+                //提交的时候会有这个数组变为json传给url，你根据具体提示完成接下来做的功能
+            </script>
+</body>
+
+</html>
