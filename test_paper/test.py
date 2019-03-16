@@ -1,17 +1,17 @@
-'''
+"""
 这里是将题目读到数据库的模块
 步骤：
 1.将题目从文件读到字符串对象中
 2.将题目从字符串对象读到数据库中
 
-'''
+"""
 
 import sqlite3
 import re
 import codecs
 
 filepath = r'question.txt'
-re_str_1 = r"^(\d{1,2})\s*、\s*([^\r]+?？)[\r\n]+A\s*[\.．]\s*([^\r]+)[\r\n]+B\s*[\.．]\s*([^\r]+)[\r\n]+"
+re_str_1 = r"^(\d{1,2})\s*、\s*([^\r]+?？)[\n]+A\s*[\.．]\s*([^\r]+)[\r\n]+B\s*[\.．]\s*([^\r]+)[\r\n]+"
 re_str_2 = r"(\d{1,2})\s*、\s*A\s*[\.．]\s*([^\s]+)\s+B\s*[\.．]\s*([^\r]+)[\r\n]+"
 
 with codecs.open(filepath, 'r', encoding='utf-8') as fr:

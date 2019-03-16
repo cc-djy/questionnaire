@@ -8,7 +8,7 @@ $(document).ready(function() {
     var part3Length;
     var totalLength;
     var equipmentType;
-     $.get("http://172.28.7.25:8000/index/",function(data,status){
+     $.get("http://172.31.5.197:8000/index/",function(data,status){
           paper = data;
           $("#title>span:last").text(data.question_types[0].description);
           part1Length = data.question_types[0].questions.length;

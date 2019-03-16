@@ -1,7 +1,7 @@
 from typing import Dict, Any, Union
 
 APP_ID = "wjxt"  # 设置应用系统的AppID，每个应用都不同，你要先去申请注册
-APP_SECRET = "*****"  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
+APP_SECRET = "***"  # 设置应用系统的appSecret，每个应用都不同，你要先去申请注册
 
 def get_app_id():
     return APP_ID
