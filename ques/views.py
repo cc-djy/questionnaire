@@ -10,6 +10,7 @@ from .global_var import result_type, getter as get_var, setter as set_var, gette
     setter_ques as set_ques, get_app_secret, get_app_id
 from .tools import get_json, clac_score, get_result, get_questions, get_client_ip
 
+
 def test(request):
     if get_ques() is None:
         set_ques(get_questions())
@@ -22,8 +23,9 @@ def test(request):
 
     return render(request, 'index.html', context)
 
-
     # return render(request, 'index.html', context)
+
+
 def mbti(request):
     context = {}
     # 上线时，这里要解封
@@ -32,12 +34,14 @@ def mbti(request):
         user_agent = parse(ua_string)
 
         if user_agent.is_mobile:
-            return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE') #这里是微信登录用的
+            return HttpResponseRedirect('https://cas.dgut.edu.cn/Wechat?state=wjxt_*_STATE')  # 这里是微信登录用的
         else:
             return HttpResponseRedirect('https://cas.dgut.edu.cn?appid=wjxt&state=STATE')
 
+    ######
 
     return render(request, 'mbti.html', context)
+
 
 def login(request):
     data = {
@@ -76,11 +80,11 @@ def login(request):
 
 
 def index(request):
-    '''关于index页面的视图'''
+    """关于index页面的视图"""
     if get_ques() is None:
         set_ques(get_questions())
     context = get_ques()
-    
+
     # return render(request, 'index.html', context)
 
     response = JsonResponse(context)
@@ -94,8 +98,10 @@ def result(request):
         return None
     try:
         commit_record = CommitRecord(
+
             user_openid=request.session.get('wx_openid'),
             user_id=request.session.get('username'),
+
             client_time=timezone.now(),
             server_time=timezone.now(),
         )

@@ -1,0 +1,25 @@
+version: "2"
+services:
+    web:
+       build: .
+       container_name: ques_web
+       volumes:
+       - .:/usr/src/app
+       - ./logs:/tmp
+       command: sh setup.sh
+       restart: always
+       ports:
+         - "8000:8000"
+    nginx:
+      build: ./nginx
+      container_name: ques_nginx
+      ports:
+        - "80:80"
+      volumes:
+        - ./static:/usr/share/nginx/html/static
+        - ./media:/usr/share/nginx/html/media
+      links:
+        - web
+      depends_on:
+        - web
+      restart: always

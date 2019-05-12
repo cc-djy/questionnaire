@@ -1,5 +1,5 @@
 def get_client_ip(request):
-    '''获取用户ip'''
+    """获取用户ip"""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
@@ -88,6 +88,7 @@ def get_questions():
         context['question_types'].append(question_type_dict)
 
     return context
+
 
 def get_remark_rule():
     '''生成题目选项所对应的分数的索引'''
@@ -196,6 +197,7 @@ def get_json():
         all_ques.update(Dict_1)
     return all_ques
 
+
 def clac_score(arg_list):
     """
     Extroversion, Introversion, Sensing, Intuition, Thinking, Feeling, Judge, Perceive = 0,0,0,0,0,0,0,0
@@ -237,12 +239,12 @@ def get_result(all_score):
     character = []
 
     if all_score['Extroversion'][0] > all_score['Introversion'][0]:
-        character .append(all_score['Extroversion'][1])
+        character.append(all_score['Extroversion'][1])
     else:
         character.append(all_score['Introversion'][1])
 
     if all_score['Sensing'][0] > all_score['Intuition'][0]:
-        character .append(all_score['Sensing'][1])
+        character.append(all_score['Sensing'][1])
     else:
         character.append(all_score['Intuition'][1])
 
